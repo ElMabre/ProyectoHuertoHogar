@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HuertoHogar - Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-flower1 me-2"></i>HuertoHogar
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contacto.html">Contacto</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrito.html">
+                            <i class="bi bi-cart3"></i> 
+                            <span class="badge bg-warning text-dark" id="cartCount">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="registro.html">Registro</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-chat-dots display-4" style="color: #2E8B57;"></i>
+                            <h2 class="card-title text-center mt-2 section-title">Contáctanos</h2>
+                            <p class="text-muted">Estamos aquí para ayudarte. Escríbenos y te responderemos a la brevedad.</p>
+                        </div>
+
+                        <form id="formContacto" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="nombreContacto" class="form-label">Nombre</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                        <input type="text" class="form-control" id="nombreContacto" 
+                                               placeholder="Tu nombre" required maxlength="100">
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        El nombre es requerido (máx. 100 caracteres)
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="correoContacto" class="form-label">Correo Electrónico</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                        <input type="email" class="form-control" id="correoContacto" 
+                                               placeholder="tu@email.com" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Por favor ingresa un correo válido (@duoc.cl, @profesor.duoc.cl o @gmail.com)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="asunto" class="form-label">Asunto</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-chat"></i></span>
+                                    <input type="text" class="form-control" id="asunto" 
+                                           placeholder="Asunto del mensaje" maxlength="200">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="comentario" class="form-label">Mensaje</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-chat-text"></i></span>
+                                    <textarea class="form-control" id="comentario" rows="5" 
+                                              placeholder="Escribe tu mensaje aquí..." required maxlength="500"></textarea>
+                                </div>
+                                <div class="form-text">
+                                    <span id="contadorCaracteres">500</span> caracteres restantes
+                                </div>
+                                <div class="invalid-feedback">
+                                    El mensaje es requerido (máx. 500 caracteres)
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 py-2">
+                                <i class="bi bi-send me-2"></i>Enviar Mensaje
+                            </button>
+                        </form>
+
+                        <hr class="my-4">
+
+                        <div class="row mt-4">
+                            <div class="col-md-4 text-center">
+                                <i class="bi bi-geo-alt fs-1" style="color: #2E8B57;"></i>
+                                <h5>Ubicación</h5>
+                                <p class="text-muted">Av. Principal 123<br>Santiago, Chile</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="bi bi-telephone fs-1" style="color: #2E8B57;"></i>
+                                <h5>Teléfono</h5>
+                                <p class="text-muted">+56 2 2345 6789</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="bi bi-envelope fs-1" style="color: #2E8B57;"></i>
+                                <h5>Email</h5>
+                                <p class="text-muted">contacto@huertohogar.cl</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cartManager.js"></script>
+    <script src="js/validaciones.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const formContacto = document.getElementById('formContacto');
+            const comentarioInput = document.getElementById('comentario');
+            const contadorCaracteres = document.getElementById('contadorCaracteres');
+            
+            // Contador de caracteres
+            comentarioInput.addEventListener('input', function() {
+                const caracteresRestantes = 500 - this.value.length;
+                contadorCaracteres.textContent = caracteresRestantes;
+                
+                if (caracteresRestantes < 0) {
+                    contadorCaracteres.classList.add('text-danger');
+                } else {
+                    contadorCaracteres.classList.remove('text-danger');
+                }
+            });
+            
+            // Validación del formulario
+            formContacto.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validarContacto()) {
+                    // Simular envío exitoso
+                    mostrarMensaje('¡Mensaje enviado correctamente! Te contactaremos pronto.', 'success');
+                    
+                    // Limpiar formulario
+                    formContacto.reset();
+                    contadorCaracteres.textContent = '500';
+                    
+                    // Quitar clases de validación
+                    const inputs = formContacto.querySelectorAll('.form-control');
+                    inputs.forEach(input => {
+                        input.classList.remove('is-valid');
+                    });
+                }
+            });
+            
+            // Validación en tiempo real
+            document.getElementById('nombreContacto').addEventListener('input', function() {
+                if (this.value && validarLongitud(this.value, 1, 100)) {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                } else {
+                    this.classList.remove('is-valid');
+                }
+            });
+            
+            document.getElementById('correoContacto').addEventListener('input', function() {
+                if (this.value && validarEmail(this.value)) {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                } else {
+                    this.classList.remove('is-valid');
+                }
+            });
+            
+            document.getElementById('comentario').addEventListener('input', function() {
+                if (this.value && validarLongitud(this.value, 1, 500)) {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                } else {
+                    this.classList.remove('is-valid');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
