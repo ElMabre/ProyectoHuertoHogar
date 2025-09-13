@@ -1,24 +1,38 @@
+<!--
+Estructura de la página de contacto de HuertoHogar.
+Incluye navbar, formulario de contacto validado, información de contacto, footer y scripts.
+Cada sección está pensada para ser fácilmente mantenida y ampliada.
+-->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Metadatos y enlaces a estilos y fuentes -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HuertoHogar - Contacto</title>
+    <!-- Bootstrap CSS para estilos y layout responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons para iconografía -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts para tipografía personalizada -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <!-- Estilos personalizados del proyecto -->
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Navbar: navegación principal del sitio -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
         <div class="container">
+            <!-- Logo y nombre del sitio -->
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-flower1 me-2"></i>HuertoHogar
             </a>
+            <!-- Botón para menú colapsable en móvil -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- Enlaces de navegación -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
@@ -27,6 +41,7 @@
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link active" href="contacto.html">Contacto</a></li>
                 </ul>
+                <!-- Icono de carrito y enlaces de usuario -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.html">
@@ -47,14 +62,17 @@
             <div class="col-lg-8 mx-auto">
                 <div class="card shadow-sm">
                     <div class="card-body p-5">
+                        <!-- Encabezado del formulario de contacto -->
                         <div class="text-center mb-4">
                             <i class="bi bi-chat-dots display-4" style="color: #2E8B57;"></i>
                             <h2 class="card-title text-center mt-2 section-title">Contáctanos</h2>
                             <p class="text-muted">Estamos aquí para ayudarte. Escríbenos y te responderemos a la brevedad.</p>
                         </div>
 
+                        <!-- Formulario de contacto con validación y contador de caracteres -->
                         <form id="formContacto" novalidate>
                             <div class="row">
+                                <!-- Campo Nombre -->
                                 <div class="col-md-6 mb-3">
                                     <label for="nombreContacto" class="form-label">Nombre</label>
                                     <div class="input-group">
@@ -66,7 +84,7 @@
                                         El nombre es requerido (máx. 100 caracteres)
                                     </div>
                                 </div>
-
+                                <!-- Campo Correo -->
                                 <div class="col-md-6 mb-3">
                                     <label for="correoContacto" class="form-label">Correo Electrónico</label>
                                     <div class="input-group">
@@ -79,7 +97,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- Campo Asunto -->
                             <div class="mb-3">
                                 <label for="asunto" class="form-label">Asunto</label>
                                 <div class="input-group">
@@ -88,7 +106,7 @@
                                            placeholder="Asunto del mensaje" maxlength="200">
                                 </div>
                             </div>
-
+                            <!-- Campo Mensaje con contador de caracteres -->
                             <div class="mb-3">
                                 <label for="comentario" class="form-label">Mensaje</label>
                                 <div class="input-group">
@@ -103,7 +121,7 @@
                                     El mensaje es requerido (máx. 500 caracteres)
                                 </div>
                             </div>
-
+                            <!-- Botón de envío -->
                             <button type="submit" class="btn btn-primary w-100 py-2">
                                 <i class="bi bi-send me-2"></i>Enviar Mensaje
                             </button>
@@ -111,6 +129,7 @@
 
                         <hr class="my-4">
 
+                        <!-- Información de contacto adicional (ubicación, teléfono, email) -->
                         <div class="row mt-4">
                             <div class="col-md-4 text-center">
                                 <i class="bi bi-geo-alt fs-1" style="color: #2E8B57;"></i>
@@ -134,14 +153,14 @@
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer del sitio -->
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container text-center">
             <p>&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts para funcionalidad y validación -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cartManager.js"></script>
@@ -152,11 +171,10 @@
             const comentarioInput = document.getElementById('comentario');
             const contadorCaracteres = document.getElementById('contadorCaracteres');
             
-            // Contador de caracteres
+            // Contador de caracteres para el textarea de mensaje
             comentarioInput.addEventListener('input', function() {
                 const caracteresRestantes = 500 - this.value.length;
                 contadorCaracteres.textContent = caracteresRestantes;
-                
                 if (caracteresRestantes < 0) {
                     contadorCaracteres.classList.add('text-danger');
                 } else {
@@ -164,18 +182,15 @@
                 }
             });
             
-            // Validación del formulario
+            // Validación del formulario al enviar
             formContacto.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
                 if (validarContacto()) {
                     // Simular envío exitoso
                     mostrarMensaje('¡Mensaje enviado correctamente! Te contactaremos pronto.', 'success');
-                    
-                    // Limpiar formulario
+                    // Limpiar formulario y contador
                     formContacto.reset();
                     contadorCaracteres.textContent = '500';
-                    
                     // Quitar clases de validación
                     const inputs = formContacto.querySelectorAll('.form-control');
                     inputs.forEach(input => {
@@ -184,7 +199,7 @@
                 }
             });
             
-            // Validación en tiempo real
+            // Validación en tiempo real para nombre
             document.getElementById('nombreContacto').addEventListener('input', function() {
                 if (this.value && validarLongitud(this.value, 1, 100)) {
                     this.classList.remove('is-invalid');
@@ -193,7 +208,7 @@
                     this.classList.remove('is-valid');
                 }
             });
-            
+            // Validación en tiempo real para correo
             document.getElementById('correoContacto').addEventListener('input', function() {
                 if (this.value && validarEmail(this.value)) {
                     this.classList.remove('is-invalid');
@@ -202,7 +217,7 @@
                     this.classList.remove('is-valid');
                 }
             });
-            
+            // Validación en tiempo real para comentario
             document.getElementById('comentario').addEventListener('input', function() {
                 if (this.value && validarLongitud(this.value, 1, 500)) {
                     this.classList.remove('is-invalid');

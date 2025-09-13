@@ -50,7 +50,7 @@
                         <div class="text-center mb-4">
                             <i class="bi bi-person-plus display-4" style="color: #2E8B57;"></i>
                             <h2 class="card-title text-center mt-2 section-title">Crear Cuenta</h2>
-                            <p class="text-muted">Únete a nuestra comunidad</p>
+                            <p class="text-muted">Regístrate para disfrutar de todos nuestros servicios</p>
                         </div>
 
                         <form id="formRegistro" novalidate>
@@ -66,7 +66,6 @@
                                         El nombre es requerido (máx. 50 caracteres)
                                     </div>
                                 </div>
-
                                 <div class="col-md-6 mb-3">
                                     <label for="apellido" class="form-label">Apellido</label>
                                     <div class="input-group">
@@ -92,41 +91,30 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="contraseña" class="form-label">Contraseña</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                        <input type="password" class="form-control" id="contraseña" 
-                                               placeholder="Contraseña" required minlength="4" maxlength="10">
-                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </div>
-                                    <div class="invalid-feedback" id="contraseñaError">
-                                        La contraseña debe tener entre 4 y 10 caracteres
-                                    </div>
+                            <div class="mb-3">
+                                <label for="contraseña" class="form-label">Contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control" id="contraseña" 
+                                           placeholder="Tu contraseña" required minlength="4" maxlength="10">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePasswordRegistro">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
                                 </div>
-
-                                <div class="col-md-6 mb-3">
-                                    <label for="confirmarContraseña" class="form-label">Confirmar Contraseña</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                                        <input type="password" class="form-control" id="confirmarContraseña" 
-                                               placeholder="Confirmar contraseña" required>
-                                    </div>
-                                    <div class="invalid-feedback" id="confirmarContraseñaError">
-                                        Las contraseñas no coinciden
-                                    </div>
+                                <div class="invalid-feedback" id="contraseñaError">
+                                    La contraseña debe tener entre 4 y 10 caracteres
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="direccion" class="form-label">Dirección</label>
+                                <label for="confirmarContraseña" class="form-label">Confirmar Contraseña</label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-                                    <input type="text" class="form-control" id="direccion" 
-                                           placeholder="Tu dirección" maxlength="300">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control" id="confirmarContraseña" 
+                                           placeholder="Repite tu contraseña" required>
+                                </div>
+                                <div class="invalid-feedback" id="confirmarContraseñaError">
+                                    Las contraseñas no coinciden
                                 </div>
                             </div>
 
@@ -144,8 +132,11 @@
                                 <i class="bi bi-person-plus me-2"></i>Crear Cuenta
                             </button>
 
-                            <div class="text-center mt-3">
-                                <p class="mb-0">¿Ya tienes una cuenta? <a href="login.html" class="text-decoration-none">Inicia sesión</a></p>
+                            <hr class="my-4">
+
+                            <div class="text-center">
+                                <p class="mb-0">¿Ya tienes una cuenta?</p>
+                                <a href="login.html" class="btn btn-outline-success mt-2">Iniciar Sesión</a>
                             </div>
                         </form>
                     </div>
@@ -169,37 +160,51 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const formRegistro = document.getElementById('formRegistro');
-            const togglePassword = document.getElementById('togglePassword');
+            const togglePassword = document.getElementById('togglePasswordRegistro');
             const passwordInput = document.getElementById('contraseña');
             
             // Mostrar/ocultar contraseña
-            togglePassword.addEventListener('click', function() {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
-            });
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+                });
+            }
             
             // Validación del formulario
-            formRegistro.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                if (validarRegistro()) {
-                    // Simular registro exitoso
-                    mostrarMensaje('¡Cuenta creada exitosamente!', 'success');
+            if (formRegistro) {
+                formRegistro.addEventListener('submit', function(e) {
+                    e.preventDefault();
                     
-                    // Redirigir después de 2 segundos
-                    setTimeout(() => {
-                        window.location.href = 'login.html';
-                    }, 2000);
-                }
-            });
+                    if (validarRegistro()) {
+                        // Simular registro exitoso
+                        mostrarMensaje('¡Cuenta creada exitosamente!', 'success');
+                        
+                        // Redirigir después de 2 segundos
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 2000);
+                    }
+                });
+            }
             
             // Validación en tiempo real
-            document.getElementById('nombre').addEventListener('input', validarNombre);
-            document.getElementById('apellido').addEventListener('input', validarApellido);
-            document.getElementById('correo').addEventListener('input', validarEmailRegistro);
-            document.getElementById('contraseña').addEventListener('input', validarPasswordRegistro);
-            document.getElementById('confirmarContraseña').addEventListener('input', validarConfirmarPassword);
+            if (document.getElementById('nombre')) {
+                document.getElementById('nombre').addEventListener('input', validarNombre);
+            }
+            if (document.getElementById('apellido')) {
+                document.getElementById('apellido').addEventListener('input', validarApellido);
+            }
+            if (document.getElementById('correo')) {
+                document.getElementById('correo').addEventListener('input', validarEmailRegistro);
+            }
+            if (document.getElementById('contraseña')) {
+                document.getElementById('contraseña').addEventListener('input', validarPasswordRegistro);
+            }
+            if (document.getElementById('confirmarContraseña')) {
+                document.getElementById('confirmarContraseña').addEventListener('input', validarConfirmarPassword);
+            }
         });
     </script>
 </body>

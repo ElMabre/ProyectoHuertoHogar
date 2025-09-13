@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Metadatos y enlaces a estilos y fuentes -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HuertoHogar - Detalle Blog</title>
+    <!-- Bootstrap CSS para estilos y layout responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons para iconografía -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts para tipografía personalizada -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <!-- Estilos personalizados del proyecto -->
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Navbar principal: navegación entre páginas del sitio -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
         <div class="container">
+            <!-- Logo y nombre del sitio -->
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-flower1 me-2"></i>HuertoHogar
             </a>
+            <!-- Botón para menú colapsable en móvil -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- Enlaces de navegación -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
@@ -27,6 +35,7 @@
                     <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
                 </ul>
+                <!-- Icono de carrito y enlaces de usuario -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.html">
@@ -43,6 +52,7 @@
 
     <!-- Contenido Principal -->
     <main class="container my-5">
+        <!-- Breadcrumb para navegación contextual -->
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
@@ -51,125 +61,13 @@
             </ol>
         </nav>
 
+        <!-- Artículo del blog (contenido principal) -->
         <article class="blog-article">
-            <header class="text-center mb-5">
-                <span class="badge bg-success mb-2">Salud</span>
-                <h1 class="section-title">Beneficios de comer orgánico</h1>
-                <div class="text-muted">
-                    <i class="bi bi-calendar me-1"></i>15 Marzo, 2024
-                    <i class="bi bi-person ms-3 me-1"></i>Por Equipo HuertoHogar
-                    <i class="bi bi-clock ms-3 me-1"></i>5 min de lectura
-                </div>
-            </header>
-
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                         class="img-fluid rounded mb-4" alt="Alimentos orgánicos">
-                    
-                    <div class="blog-content">
-                        <p class="lead">Descubre por qué elegir productos orgánicos no solo mejora tu salud, sino que también contribuye a un medio ambiente más sostenible y apoya a las comunidades agrícolas locales.</p>
-
-                        <h2>¿Qué significa realmente "orgánico"?</h2>
-                        <p>Los productos orgánicos son aquellos que se cultivan sin el uso de pesticidas sintéticos, herbicidas químicos, fertilizantes artificiales ni organismos genéticamente modificados. Este método de cultivo se basa en prácticas sostenibles que respetan el equilibrio natural de los ecosistemas.</p>
-
-                        <h2>Beneficios para la salud</h2>
-                        <p>El consumo de productos orgánicos ofrece numerosos beneficios para la salud:</p>
-                        
-                        <div class="row mb-4">
-                            <div class="col-md-6">
-                                <div class="card border-0 shadow-sm h-100">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><i class="bi bi-heart text-success me-2"></i>Menos toxinas</h5>
-                                        <p class="card-text">Contienen hasta un 50% menos de residuos de pesticidas que los productos convencionales.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card border-0 shadow-sm h-100">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><i class="bi bi-nutrition text-success me-2"></i>Más nutrientes</h5>
-                                        <p class="card-text">Estudios demuestran que pueden tener mayores niveles de vitaminas y antioxidantes.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h2>Beneficios ambientales</h2>
-                        <p>La agricultura orgánica contribuye significativamente a la protección del medio ambiente:</p>
-                        <ul>
-                            <li><strong>Conservación del suelo:</strong> Las prácticas orgánicas previenen la erosión y mantienen la fertilidad de la tierra.</li>
-                            <li><strong>Protección del agua:</strong> Al no usar químicos, se evita la contaminación de fuentes hídricas.</li>
-                            <li><strong>Biodiversidad:</strong> Fomenta la diversidad de especies y ecosistemas.</li>
-                            <li><strong>Reducción de emisiones:</strong> Genera menos gases de efecto invernadero que la agricultura convencional.</li>
-                        </ul>
-
-                        <h2>Impacto social y económico</h2>
-                        <p>Al elegir productos orgánicos, también estás apoyando:</p>
-                        <div class="alert alert-info">
-                            <i class="bi bi-info-circle me-2"></i>
-                            <strong>Agricultores locales:</strong> La mayoría de los productores orgánicos son pequeñas empresas familiares que reciben un precio justo por su trabajo.
-                        </div>
-
-                        <h2>¿Cómo identificar productos realmente orgánicos?</h2>
-                        <p>Busca estas certificaciones en los productos:</p>
-                        <div class="row text-center mb-4">
-                            <div class="col-md-4 mb-3">
-                                <div class="border rounded p-3">
-                                    <i class="bi bi-award display-4 text-success mb-2"></i>
-                                    <h6>Certificación USDA</h6>
-                                    <small>Estándar internacional</small>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="border rounded p-3">
-                                    <i class="bi bi-check-circle display-4 text-success mb-2"></i>
-                                    <h6>Certificación local</h6>
-                                    <small>Orgánico chileno</small>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="border rounded p-3">
-                                    <i class="bi bi-leaf display-4 text-success mb-2"></i>
-                                    <h6>Sello orgánico</h6>
-                                    <small>Garantía de calidad</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-success">
-                            <h5><i class="bi bi-lightbulb me-2"></i>Consejo práctico</h5>
-                            <p class="mb-0">Comienza incorporando gradualmente productos orgánicos en tu dieta. Prioriza aquellos que consumes con piel o cáscara, como frutillas, manzanas y espinacas.</p>
-                        </div>
-
-                        <footer class="mt-5 pt-4 border-top">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>Comparte este artículo:</strong>
-                                    <div class="btn-group ms-2">
-                                        <button class="btn btn-outline-primary btn-sm">
-                                            <i class="bi bi-facebook"></i>
-                                        </button>
-                                        <button class="btn btn-outline-info btn-sm">
-                                            <i class="bi bi-twitter"></i>
-                                        </button>
-                                        <button class="btn btn-outline-danger btn-sm">
-                                            <i class="bi bi-instagram"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <a href="blog.html" class="btn btn-outline-secondary">
-                                    <i class="bi bi-arrow-left me-1"></i>Volver al blog
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                </div>
-            </div>
+            <!-- El contenido se cargará dinámicamente con JS -->
         </article>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer del sitio -->
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container text-center">
             <p>&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
@@ -181,19 +79,10 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts necesarios para funcionalidad y componentes interactivos -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cartManager.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtener ID del artículo desde la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const articleId = urlParams.get('id');
-            
-            // Aquí se cargaría el contenido del artículo según el ID
-            // Por ahora es contenido estático de ejemplo
-        });
-    </script>
+    <script src="js/blog-detalle.js"></script>
 </body>
 </html>

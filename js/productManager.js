@@ -1,6 +1,9 @@
+// Clase principal para la gestión de productos en la tienda
 class ProductManager {
     constructor() {
+        // Lista de productos disponibles en la tienda (simulada, hardcodeada)
         this.products = [
+            // Cada producto tiene id, nombre, precio, categoría, imagen, stock, descripción y origen
             {
                 id: 'FR001',
                 nombre: 'Manzanas Fuji',
@@ -93,14 +96,16 @@ class ProductManager {
             }
         ];
         
-        this.init();
+        this.init(); // Inicializa la visualización y filtros al crear la instancia
     }
 
+    // Inicializa la vista de productos y los filtros
     init() {
-        this.renderProducts();
-        this.setupFilters();
+        this.renderProducts();   // Muestra todos los productos en la grilla
+        this.setupFilters();     // Configura los filtros de búsqueda y categoría
     }
 
+    // Renderiza los productos en la grilla principal (puede recibir productos filtrados)
     renderProducts(filteredProducts = null) {
         const productsToRender = filteredProducts || this.products;
         const grid = document.getElementById('productGrid');
@@ -110,7 +115,9 @@ class ProductManager {
         grid.innerHTML = productsToRender.map(product => `
             <div class="col">
                 <div class="card h-100 shadow-sm">
-                    <img src="${product.imagen}" class="card-img-top" alt="${product.nombre}" style="height: 200px; object-fit: cover;">
+                    <a href="detalle.html?id=${product.id}">
+                        <img src="${product.imagen}" class="card-img-top product-img img-fluid" alt="${product.nombre}">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title" style="color: #8B4513;">${product.nombre}</h5>
                         <p class="card-text">${product.descripcion.substring(0, 80)}...</p>
@@ -133,23 +140,28 @@ class ProductManager {
         `).join('');
     }
 
+    // Configura los filtros de categoría y búsqueda
     setupFilters() {
         const categoriaFilter = document.getElementById('categoriaFilter');
         const searchProduct = document.getElementById('searchProduct');
 
+        // Filtro por categoría
         if (categoriaFilter) {
             categoriaFilter.addEventListener('change', () => this.filterProducts());
         }
         
+        // Filtro por texto (nombre, descripción, origen)
         if (searchProduct) {
             searchProduct.addEventListener('input', () => this.filterProducts());
         }
     }
 
+    // Filtra los productos según la categoría y/o búsqueda de texto
     filterProducts() {
         const categoria = document.getElementById('categoriaFilter')?.value || '';
         const searchTerm = document.getElementById('searchProduct')?.value.toLowerCase() || '';
 
+        // Filtra por categoría y por coincidencia en nombre, descripción u origen
         const filtered = this.products.filter(product => {
             const matchesCategoria = !categoria || product.categoria === categoria;
             const matchesSearch = !searchTerm || 
@@ -162,19 +174,23 @@ class ProductManager {
         this.renderProducts(filtered);
     }
 
+    // Devuelve un producto por su ID
     getProductById(id) {
         return this.products.find(product => product.id === id);
     }
 
+    // Devuelve todos los productos de una categoría específica
     getProductsByCategory(category) {
         return this.products.filter(product => product.categoria === category);
     }
 
+    // Devuelve una cantidad limitada de productos destacados (los primeros N)
     getFeaturedProducts(limit = 3) {
         // Simular productos destacados (podría ser por stock, rating, etc.)
         return this.products.slice(0, limit);
     }
 
+    // Reduce el stock de un producto (por ejemplo, al comprar)
     reduceStock(productId, quantity) {
         const product = this.getProductById(productId);
         if (product && product.stock >= quantity) {
@@ -184,6 +200,7 @@ class ProductManager {
         return false;
     }
 
+    // Aumenta el stock de un producto (por ejemplo, al cancelar una compra)
     increaseStock(productId, quantity) {
         const product = this.getProductById(productId);
         if (product) {
@@ -194,5 +211,5 @@ class ProductManager {
     }
 }
 
-// Inicializar el productManager global
+// Inicializar el productManager global para acceso desde otras partes del sitio
 window.productManager = new ProductManager();

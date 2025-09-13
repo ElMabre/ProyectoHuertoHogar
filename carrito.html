@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Metadatos y enlaces a estilos y fuentes -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HuertoHogar - Carrito</title>
+    <!-- Bootstrap CSS para estilos y layout responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons para iconografía -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts para tipografía personalizada -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <!-- Estilos personalizados del proyecto -->
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Navbar principal: navegación entre páginas del sitio -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
         <div class="container">
+            <!-- Logo y nombre del sitio -->
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-flower1 me-2"></i>HuertoHogar
             </a>
+            <!-- Botón para menú colapsable en móvil -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- Enlaces de navegación -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
@@ -27,6 +35,7 @@
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
                 </ul>
+                <!-- Icono de carrito activo y enlaces de usuario -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="carrito.html">
@@ -43,9 +52,11 @@
 
     <!-- Contenido Principal -->
     <main class="container my-5">
+        <!-- Título de la página -->
         <h1 class="text-center mb-4 section-title">Tu Carrito de Compras</h1>
         
         <div class="row">
+            <!-- Tabla de productos en el carrito -->
             <div class="col-lg-8">
                 <div class="card shadow-sm">
                     <div class="card-body">
@@ -61,7 +72,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="cartTable">
-                                    <!-- Se llena con JS -->
+                                    <!-- Se llena dinámicamente con JS (cartManager.renderCart) -->
                                 </tbody>
                             </table>
                         </div>
@@ -69,6 +80,7 @@
                 </div>
             </div>
             
+            <!-- Resumen de compra y acciones -->
             <div class="col-lg-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
@@ -86,10 +98,13 @@
                             <strong>Total:</strong>
                             <strong>$<span id="cartTotal">0</span></strong>
                         </div>
+                        <!-- Botón para vaciar el carrito -->
                         <button class="btn btn-danger w-100 mb-2" onclick="cartManager.clearCart()">
                             <i class="bi bi-trash"></i> Vaciar Carrito
                         </button>
+                        <!-- Botón para proceder al pago (redirige a login si no está autenticado) -->
                         <a href="login.html" class="btn btn-success w-100">Proceder al Pago</a>
+                        <!-- Botón para volver a la tienda -->
                         <a href="productos.html" class="btn btn-outline-secondary w-100 mt-2">Seguir Comprando</a>
                     </div>
                 </div>
@@ -97,19 +112,19 @@
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer del sitio -->
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container text-center">
             <p>&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts para funcionalidad de Bootstrap y lógica del carrito -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cartManager.js"></script>
     <script>
-        // Inicializar carrito en esta página
+        // Inicializar y renderizar el carrito al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
             cartManager.renderCart();
         });

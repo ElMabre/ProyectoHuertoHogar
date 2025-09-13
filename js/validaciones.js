@@ -1,6 +1,10 @@
 // Funciones de validación generales
+
+/**
+ * Muestra un mensaje al usuario.
+ * Usa el toast de cartManager si está disponible, si no, usa alert.
+ */
 function mostrarMensaje(mensaje, tipo = 'info') {
-    // Usar el toast de cartManager si está disponible
     if (typeof cartManager !== 'undefined' && typeof cartManager.showAlert === 'function') {
         cartManager.showAlert(mensaje, tipo);
     } else {
@@ -8,16 +12,27 @@ function mostrarMensaje(mensaje, tipo = 'info') {
     }
 }
 
+/**
+ * Valida si el email es de los dominios permitidos.
+ */
 function validarEmail(email) {
     const emailRegex = /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/;
     return emailRegex.test(email);
 }
 
+/**
+ * Valida la longitud de un texto entre un mínimo y máximo.
+ */
 function validarLongitud(texto, min, max) {
     return texto.length >= min && texto.length <= max;
 }
 
-// Validaciones para Login
+// -------- Validaciones para Login --------
+
+/**
+ * Valida el campo de email en el login.
+ * Muestra mensajes de error y estilos según corresponda.
+ */
 function validarEmailLogin() {
     const emailInput = document.getElementById('correoLogin');
     const errorDiv = document.getElementById('correoLoginError');
@@ -39,6 +54,10 @@ function validarEmailLogin() {
     return true;
 }
 
+/**
+ * Valida el campo de contraseña en el login.
+ * Muestra mensajes de error y estilos según corresponda.
+ */
 function validarPasswordLogin() {
     const passwordInput = document.getElementById('passLogin');
     const errorDiv = document.getElementById('passLoginError');
@@ -60,14 +79,20 @@ function validarPasswordLogin() {
     return true;
 }
 
+/**
+ * Valida el formulario de login completo.
+ */
 function validarLogin() {
     const emailValido = validarEmailLogin();
     const passwordValido = validarPasswordLogin();
-    
     return emailValido && passwordValido;
 }
 
-// Validaciones para Registro
+// -------- Validaciones para Registro --------
+
+/**
+ * Valida el campo nombre en el registro.
+ */
 function validarNombre() {
     const nombreInput = document.getElementById('nombre');
     const errorDiv = document.getElementById('nombreError');
@@ -89,6 +114,9 @@ function validarNombre() {
     return true;
 }
 
+/**
+ * Valida el campo apellido en el registro.
+ */
 function validarApellido() {
     const apellidoInput = document.getElementById('apellido');
     const errorDiv = document.getElementById('apellidoError');
@@ -110,6 +138,9 @@ function validarApellido() {
     return true;
 }
 
+/**
+ * Valida el campo email en el registro.
+ */
 function validarEmailRegistro() {
     const emailInput = document.getElementById('correo');
     const errorDiv = document.getElementById('correoError');
@@ -131,6 +162,9 @@ function validarEmailRegistro() {
     return true;
 }
 
+/**
+ * Valida el campo contraseña en el registro.
+ */
 function validarPasswordRegistro() {
     const passwordInput = document.getElementById('contraseña');
     const errorDiv = document.getElementById('contraseñaError');
@@ -152,6 +186,9 @@ function validarPasswordRegistro() {
     return true;
 }
 
+/**
+ * Valida que la confirmación de contraseña coincida con la contraseña.
+ */
 function validarConfirmarPassword() {
     const passwordInput = document.getElementById('contraseña');
     const confirmInput = document.getElementById('confirmarContraseña');
@@ -174,6 +211,9 @@ function validarConfirmarPassword() {
     return true;
 }
 
+/**
+ * Valida que los términos y condiciones estén aceptados.
+ */
 function validarTerminos() {
     const terminosInput = document.getElementById('terminos');
     
@@ -186,6 +226,9 @@ function validarTerminos() {
     return true;
 }
 
+/**
+ * Valida el formulario de registro completo.
+ */
 function validarRegistro() {
     const nombreValido = validarNombre();
     const apellidoValido = validarApellido();
@@ -197,7 +240,11 @@ function validarRegistro() {
     return nombreValido && apellidoValido && emailValido && passwordValido && confirmValido && terminosValido;
 }
 
-// Validaciones para Contacto
+// -------- Validaciones para Contacto --------
+
+/**
+ * Valida el formulario de contacto (nombre, email, comentario).
+ */
 function validarContacto() {
     const nombreInput = document.getElementById('nombreContacto');
     const emailInput = document.getElementById('correoContacto');
@@ -244,26 +291,26 @@ function validarContacto() {
     return valido;
 }
 
-// Validación de RUN (para admin)
+// -------- Validación y formateo de RUN (para admin) --------
+
+/**
+ * Valida el formato del RUN chileno (sin puntos ni guión, largo y caracteres).
+ */
 function validarRUN(run) {
-    // Eliminar puntos y guión
     run = run.replace(/[\.\-]/g, '');
-    
-    // Validar longitud
     if (run.length < 7 || run.length > 9) {
         return false;
     }
-    
-    // Validar que sea alfanumérico
     const runRegex = /^[0-9]+[0-9kK]{1}$/;
     if (!runRegex.test(run)) {
         return false;
     }
-    
     return true;
 }
 
-// Formatear RUN
+/**
+ * Formatea el RUN chileno con puntos y guión.
+ */
 function formatearRUN(run) {
     run = run.replace(/[\.\-]/g, '');
     if (run.length <= 1) return run;

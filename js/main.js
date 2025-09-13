@@ -1,20 +1,21 @@
 // Funciones generales para todo el sitio
 document.addEventListener('DOMContentLoaded', function() {
+    // Mensaje de consola para confirmar carga del sitio
     console.log('HuertoHogar cargado correctamente');
     
-    // Inicializar tooltips de Bootstrap
+    // Inicializar tooltips de Bootstrap en todos los elementos con data-bs-toggle="tooltip"
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 
-    // Inicializar popovers
+    // Inicializar popovers de Bootstrap en todos los elementos con data-bs-toggle="popover"
     const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
     const popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl);
     });
 
-    // Manejar formularios
+    // Validación de formularios con la clase .needs-validation (Bootstrap)
     const forms = document.querySelectorAll('.needs-validation');
     forms.forEach(form => {
         form.addEventListener('submit', event => {
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, false);
     });
 
-    // Smooth scroll para anchors
+    // Smooth scroll para enlaces internos (anchors)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Manejar imágenes que no cargan
+    // Manejar imágenes que no cargan: reemplaza por una imagen placeholder
     document.querySelectorAll('img').forEach(img => {
         img.addEventListener('error', function() {
             this.src = 'https://via.placeholder.com/400x300?text=Imagen+no+disponible';
@@ -48,19 +49,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Actualizar año del copyright
+    // Actualiza el año actual en el elemento con id 'currentYear' (footer)
     const yearElement = document.getElementById('currentYear');
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
 
-    // Cargar carrito count en todas las páginas
+    // Actualiza el contador del carrito en todas las páginas si existe cartManager
     if (typeof cartManager !== 'undefined') {
         cartManager.updateCartCount();
     }
 });
 
-// Función para mostrar loading
+// Función para mostrar un overlay de loading/spinner
 function showLoading() {
     const loading = document.createElement('div');
     loading.className = 'loading-overlay';
@@ -73,14 +74,14 @@ function showLoading() {
     return loading;
 }
 
-// Función para ocultar loading
+// Función para ocultar el overlay de loading/spinner
 function hideLoading(loadingElement) {
     if (loadingElement) {
         loadingElement.remove();
     }
 }
 
-// Función para formatear precios
+// Función para formatear precios en CLP (Chile)
 function formatPrice(price) {
     return new Intl.NumberFormat('es-CL', {
         style: 'currency',
@@ -88,13 +89,13 @@ function formatPrice(price) {
     }).format(price);
 }
 
-// Función para validar email
+// Función para validar emails permitidos (duoc.cl, profesor.duoc.cl, gmail.com)
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/;
     return emailRegex.test(email);
 }
 
-// Función para debounce
+// Función debounce: limita la frecuencia de ejecución de una función
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -107,19 +108,19 @@ function debounce(func, wait) {
     };
 }
 
-// Manejar errores globalmente
+// Manejo global de errores de JavaScript
 window.addEventListener('error', function(e) {
     console.error('Error global:', e.error);
     // Aquí se podría enviar el error a un servicio de tracking
 });
 
-// Manejar promises no capturadas
+// Manejo global de promesas no capturadas
 window.addEventListener('unhandledrejection', function(e) {
     console.error('Promise rechazada no capturada:', e.reason);
     e.preventDefault();
 });
 
-// Exportar funciones para uso global
+// Exporta funciones utilitarias al objeto global window.HuertoHogar
 window.HuertoHogar = {
     showLoading,
     hideLoading,

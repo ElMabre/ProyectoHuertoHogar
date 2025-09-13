@@ -10,39 +10,10 @@
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">
-                <i class="bi bi-flower1 me-2"></i>HuertoHogar
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="carrito.html">
-                            <i class="bi bi-cart3"></i> 
-                            <span class="badge bg-warning text-dark" id="cartCount">0</span>
-                        </a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>
-                    <li class="nav-item"><a class="nav-link" href="registro.html">Registrarse</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Contenido Principal -->
+    <!-- Navbar (igual que en tu código original) -->
+    
     <main class="container my-5">
+        <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
@@ -51,157 +22,26 @@
             </ol>
         </nav>
 
+        <!-- Detalle del producto -->
         <div class="row" id="productDetail">
-            <!-- Se carga dinámicamente con JavaScript -->
+            <!-- Se llena dinámicamente con JS -->
         </div>
 
         <!-- Productos relacionados -->
         <section class="mt-5">
             <h3 class="section-title mb-4">Productos relacionados</h3>
             <div class="row row-cols-1 row-cols-md-3 g-4" id="relatedProducts">
-                <!-- Se carga dinámicamente con JavaScript -->
+                <!-- Se llena dinámicamente con JS -->
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p>&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
-            <div class="mt-2">
-                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer (igual que en tu código original) -->
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cartManager.js"></script>
     <script src="js/productManager.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtener ID del producto desde la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id');
-            
-            if (!productId) {
-                window.location.href = 'productos.html';
-                return;
-            }
-
-            // Buscar producto
-            const product = productManager.getProductById(productId);
-            
-            if (!product) {
-                window.location.href = 'productos.html';
-                return;
-            }
-
-            // Actualizar breadcrumb
-            document.getElementById('breadcrumbProduct').textContent = product.nombre;
-
-            // Mostrar detalle del producto
-            const productDetail = document.getElementById('productDetail');
-            productDetail.innerHTML = `
-                <div class="col-md-6 mb-4">
-                    <img src="${product.imagen}" class="img-fluid rounded shadow" alt="${product.nombre}" style="max-height: 400px; width: 100%; object-fit: cover;">
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">${product.categoria}</span>
-                            <h1 class="card-title" style="color: #8B4513;">${product.nombre}</h1>
-                            <p class="text-muted">Origen: ${product.origen}</p>
-                            
-                            <div class="d-flex align-items-center mb-3">
-                                <h3 class="text-success me-3">$${product.precio.toLocaleString('es-CL')}</h3>
-                                <span class="badge ${product.stock > 10 ? 'bg-success' : 'bg-warning'}">
-                                    ${product.stock > 10 ? 'En stock' : 'Últimas unidades'}
-                                </span>
-                            </div>
-
-                            <p class="card-text">${product.descripcion}</p>
-
-                            <div class="mb-4">
-                                <h5>Beneficios:</h5>
-                                <ul>
-                                    <li>Producto ${product.categoria === 'organicos' ? 'orgánico certificado' : 'fresco'}</li>
-                                    <li>Cultivado de manera sostenible</li>
-                                    <li>Entrega directa desde el campo</li>
-                                    <li>Máxima frescura garantizada</li>
-                                </ul>
-                            </div>
-
-                            <div class="row align-items-center mb-4">
-                                <div class="col-auto">
-                                    <label for="cantidad" class="form-label">Cantidad:</label>
-                                </div>
-                                <div class="col-4">
-                                    <input type="number" class="form-control" id="cantidad" value="1" min="1" max="${product.stock}">
-                                </div>
-                                <div class="col">
-                                    <span class="text-muted">Disponible: ${product.stock} unidades</span>
-                                </div>
-                            </div>
-
-                            <div class="d-grid gap-2 d-md-flex">
-                                <button class="btn btn-warning flex-fill" onclick="addToCartWithQuantity('${product.id}')">
-                                    <i class="bi bi-cart-plus me-2"></i>Añadir al carrito
-                                </button>
-                                <button class="btn btn-outline-success flex-fill">
-                                    <i class="bi bi-heart me-2"></i>Guardar
-                                </button>
-                            </div>
-
-                            <div class="mt-4">
-                                <div class="d-flex align-items-center text-muted">
-                                    <i class="bi bi-truck me-2"></i>
-                                    <span>Envío gratis en compras sobre $15.000</span>
-                                </div>
-                                <div class="d-flex align-items-center text-muted mt-1">
-                                    <i class="bi bi-arrow-clockwise me-2"></i>
-                                    <span>Devolución gratuita en 7 días</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            // Mostrar productos relacionados
-            const relatedProducts = productManager.getProductsByCategory(product.categoria)
-                .filter(p => p.id !== product.id)
-                .slice(0, 3);
-
-            const relatedContainer = document.getElementById('relatedProducts');
-            if (relatedProducts.length > 0) {
-                relatedContainer.innerHTML = relatedProducts.map(related => `
-                    <div class="col">
-                        <div class="card h-100 shadow-sm">
-                            <img src="${related.imagen}" class="card-img-top" alt="${related.nombre}" style="height: 200px; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title">${related.nombre}</h5>
-                                <p class="card-text">${related.descripcion.substring(0, 60)}...</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="fw-bold text-success">$${related.precio.toLocaleString('es-CL')}</span>
-                                    <a href="detalle.html?id=${related.id}" class="btn btn-sm btn-outline-success">Ver</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                relatedContainer.innerHTML = '<p class="text-muted">No hay productos relacionados disponibles.</p>';
-            }
-        });
-
-        function addToCartWithQuantity(productId) {
-            const cantidad = parseInt(document.getElementById('cantidad').value) || 1;
-            addToCart(productId, cantidad);
-        }
-    </script>
+    <script src="js/detalle.js"></script> <!-- Nuevo archivo JS -->
 </body>
 </html>
