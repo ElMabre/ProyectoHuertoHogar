@@ -95,7 +95,7 @@ class ProductManager {
                 origen: 'Región de Los Lagos'
             }
         ];
-        
+
         this.init(); // Inicializa la visualización y filtros al crear la instancia
     }
 
@@ -109,9 +109,10 @@ class ProductManager {
     renderProducts(filteredProducts = null) {
         const productsToRender = filteredProducts || this.products;
         const grid = document.getElementById('productGrid');
-        
+
         if (!grid) return;
-        
+
+        // Renderiza cada producto en una card
         grid.innerHTML = productsToRender.map(product => `
             <div class="col">
                 <div class="card h-100 shadow-sm">
@@ -144,12 +145,12 @@ class ProductManager {
     setupFilters() {
         const categoriaFilter = document.getElementById('categoriaFilter');
         const searchProduct = document.getElementById('searchProduct');
-        
+
         // Filtro por categoría
         if (categoriaFilter) {
             categoriaFilter.addEventListener('change', () => this.filterProducts());
         }
-        
+
         // Filtro por texto (nombre, descripción, origen)
         if (searchProduct) {
             searchProduct.addEventListener('input', () => this.filterProducts());
@@ -160,19 +161,19 @@ class ProductManager {
     filterProducts() {
         const categoria = document.getElementById('categoriaFilter')?.value || '';
         const searchTerm = document.getElementById('searchProduct')?.value.toLowerCase() || '';
-        
+
         // Filtra por categoría y por coincidencia en nombre, descripción u origen
         const filtered = this.products.filter(product => {
             const matchesCategoria = !categoria || product.categoria === categoria;
-            const matchesSearch = !searchTerm || 
-                                  product.nombre.toLowerCase().includes(searchTerm) ||
-                                  product.descripcion.toLowerCase().includes(searchTerm) ||
-                                  product.origen.toLowerCase().includes(searchTerm);
+            const matchesSearch = !searchTerm ||
+                product.nombre.toLowerCase().includes(searchTerm) ||
+                product.descripcion.toLowerCase().includes(searchTerm) ||
+                product.origen.toLowerCase().includes(searchTerm);
             return matchesCategoria && matchesSearch;
         });
-        
+
         this.renderProducts(filtered);
-        
+
         // Mostrar mensaje si no hay productos
         const noProducts = document.getElementById('noProducts');
         if (noProducts) {

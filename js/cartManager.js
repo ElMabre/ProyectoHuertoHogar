@@ -5,8 +5,10 @@
 
 class CartManager {
     constructor() {
+        // Inicializa el carrito desde localStorage
         this.cart = this.getCart();
-        this.shippingCost = 3500; // Costo de envío fijo
+        // Costo de envío fijo
+        this.shippingCost = 3500;
     }
 
     /**
@@ -35,29 +37,29 @@ class CartManager {
         // Obtener productos del localStorage
         const products = JSON.parse(localStorage.getItem('huertohogar_productos')) || [];
         const product = products.find(p => p.id === productId);
-        
+
         if (!product) {
             this.showToast('Producto no encontrado', 'danger');
             return false;
         }
-        
+
         if (product.stock < quantity) {
             this.showToast('No hay suficiente stock disponible', 'warning');
             return false;
         }
-        
+
         // Buscar si el producto ya está en el carrito
         const existingItemIndex = this.cart.findIndex(item => item.id === productId);
-        
+
         if (existingItemIndex !== -1) {
             // Actualizar cantidad si ya existe
             const newQuantity = this.cart[existingItemIndex].cantidad + quantity;
-            
+
             if (newQuantity > product.stock) {
                 this.showToast('No hay suficiente stock disponible', 'warning');
                 return false;
             }
-            
+
             this.cart[existingItemIndex].cantidad = newQuantity;
         } else {
             // Añadir nuevo producto al carrito
@@ -69,11 +71,11 @@ class CartManager {
                 cantidad: quantity
             });
         }
-        
+
         // Guardar carrito actualizado
         this.saveCart(this.cart);
         this.updateCartCount();
-        
+
         this.showToast('Producto añadido al carrito', 'success');
         return true;
     }
@@ -86,14 +88,14 @@ class CartManager {
     removeFromCart(productId) {
         const initialLength = this.cart.length;
         this.cart = this.cart.filter(item => item.id !== productId);
-        
+
         if (this.cart.length < initialLength) {
             this.saveCart(this.cart);
             this.updateCartCount();
             this.showToast('Producto eliminado del carrito', 'success');
             return true;
         }
-        
+
         this.showToast('Producto no encontrado en el carrito', 'warning');
         return false;
     }
@@ -106,30 +108,30 @@ class CartManager {
      */
     updateQuantity(productId, newQuantity) {
         const itemIndex = this.cart.findIndex(item => item.id === productId);
-        
+
         if (itemIndex === -1) {
             this.showToast('Producto no encontrado en el carrito', 'warning');
             return false;
         }
-        
+
         if (newQuantity <= 0) {
             return this.removeFromCart(productId);
         }
-        
+
         // Verificar stock disponible
         const products = JSON.parse(localStorage.getItem('huertohogar_productos')) || [];
         const product = products.find(p => p.id === productId);
-        
+
         if (!product) {
             this.showToast('Producto no encontrado en el inventario', 'danger');
             return this.removeFromCart(productId);
         }
-        
+
         if (newQuantity > product.stock) {
             this.showToast('No hay suficiente stock disponible', 'warning');
             return false;
         }
-        
+
         this.cart[itemIndex].cantidad = newQuantity;
         this.saveCart(this.cart);
         this.updateCartCount();
@@ -145,11 +147,11 @@ class CartManager {
             this.showToast('El carrito ya está vacío', 'info');
             return false;
         }
-        
+
         this.cart = [];
         this.saveCart(this.cart);
         this.updateCartCount();
-        
+
         this.showToast('Carrito vaciado', 'success');
         return true;
     }
@@ -202,9 +204,9 @@ class CartManager {
         const subtotalEl = document.getElementById('subtotal');
         const shippingEl = document.getElementById('shipping');
         const totalEl = document.getElementById('cartTotal');
-        
+
         if (!cartTable || !subtotalEl || !shippingEl || !totalEl) return;
-        
+
         if (this.isEmpty()) {
             cartTable.innerHTML = `
                 <tr>
@@ -220,7 +222,7 @@ class CartManager {
             totalEl.textContent = '0';
             return;
         }
-        
+
         cartTable.innerHTML = this.cart.map(item => {
             const subtotal = item.precio * item.cantidad;
             return `
@@ -245,7 +247,7 @@ class CartManager {
                 </tr>
             `;
         }).join('');
-        
+
         subtotalEl.textContent = this.calculateSubtotal().toLocaleString('es-CL');
         shippingEl.textContent = this.calculateShipping().toLocaleString('es-CL');
         totalEl.textContent = this.calculateTotal().toLocaleString('es-CL');

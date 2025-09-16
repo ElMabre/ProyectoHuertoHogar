@@ -126,17 +126,20 @@ const blogArticles = [
 document.addEventListener('DOMContentLoaded', function() {
     // Solo ejecutar en la página de detalle del blog
     if (!document.querySelector('.blog-article')) return;
-    
+
+    // Obtiene el ID del artículo desde la URL
     const urlParams = new URLSearchParams(window.location.search);
     const articleId = urlParams.get('id');
     const article = blogArticles.find(a => a.id === articleId);
     const container = document.querySelector('.blog-article');
-    
+
+    // Si no se encuentra el artículo, muestra mensaje de error
     if (!article) {
         container.innerHTML = '<p class="text-muted">Artículo no encontrado.</p>';
         return;
     }
-    
+
+    // Renderiza el contenido del artículo en la página
     container.innerHTML = `
         <header class="text-center mb-5">
             <span class="badge bg-success mb-2">${article.categoria}</span>
