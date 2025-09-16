@@ -30,6 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
     renderRelatedProducts(product);
 });
 
+/**
+ * Renderiza el detalle del producto en la página
+ * @param {Object} product - Producto a mostrar
+ */
 function renderProductDetail(product) {
     const productDetail = document.getElementById('productDetail');
     productDetail.innerHTML = `
@@ -99,6 +103,10 @@ function renderProductDetail(product) {
     `;
 }
 
+/**
+ * Renderiza los productos relacionados en la sección correspondiente
+ * @param {Object} product - Producto actual para buscar relacionados
+ */
 function renderRelatedProducts(product) {
     // Buscar productos relacionados (misma categoría, excluyendo el actual)
     const relatedProducts = window.productManager.getProductsByCategory(product.categoria)
@@ -128,7 +136,10 @@ function renderRelatedProducts(product) {
     }
 }
 
-// Función para añadir al carrito la cantidad seleccionada
+/**
+ * Función para añadir al carrito la cantidad seleccionada desde el detalle
+ * @param {string} productId - ID del producto a añadir
+ */
 function addToCartWithQuantity(productId) {
     const cantidad = parseInt(document.getElementById('cantidad').value) || 1;
     addToCart(productId, cantidad);

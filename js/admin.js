@@ -1,18 +1,23 @@
+/**
+ * Clase principal para la administración del panel de HuertoHogar
+ * Gestiona navegación, carga de productos, usuarios, pedidos y modales
+ */
 class AdminManager {
   constructor() {
     this.init();
   }
 
+  // Inicializa el panel de administración
   init() {
-    this.setupNavigation();
-    this.loadProducts();
-    this.loadUsers();
-    this.loadOrders();
-    this.setupModals();
+    this.setupNavigation(); // Configura la navegación lateral
+    this.loadProducts();    // Carga la tabla de productos
+    this.loadUsers();       // Carga la tabla de usuarios
+    this.loadOrders();      // Carga la tabla de pedidos
+    this.setupModals();     // Configura los modales de productos y usuarios
   }
 
+  // Configura la navegación del sidebar y muestra la sección correspondiente
   setupNavigation() {
-    // Navegación del sidebar
     const navLinks = document.querySelectorAll('.nav-link[data-bs-target]');
     const contentSections = document.querySelectorAll('.content-section');
 
@@ -20,15 +25,15 @@ class AdminManager {
       link.addEventListener('click', (e) => {
         e.preventDefault();
 
-        // Remover active de todos los links
+        // Remueve la clase active de todos los links
         navLinks.forEach(navLink => navLink.classList.remove('active'));
-        // Agregar active al link clickeado
+        // Agrega la clase active al link clickeado
         link.classList.add('active');
 
-        // Ocultar todas las secciones
+        // Oculta todas las secciones
         contentSections.forEach(section => section.classList.add('d-none'));
 
-        // Mostrar la sección correspondiente
+        // Muestra la sección correspondiente al link
         const targetSection = document.getElementById(link.dataset.bsTarget);
         if (targetSection) {
           targetSection.classList.remove('d-none');
@@ -37,6 +42,7 @@ class AdminManager {
     });
   }
 
+  // Carga la tabla de productos con datos simulados
   loadProducts() {
     const productos = [
       {
@@ -108,6 +114,7 @@ class AdminManager {
     }
   }
 
+  // Carga la tabla de usuarios con datos simulados
   loadUsers() {
     const usuarios = [
       {
@@ -171,6 +178,7 @@ class AdminManager {
     }
   }
 
+  // Carga la tabla de pedidos con datos simulados
   loadOrders() {
     const pedidos = [
       {
@@ -234,6 +242,7 @@ class AdminManager {
     }
   }
 
+  // Devuelve la clase de badge según el estado del pedido
   getBadgeClass(estado) {
     const classes = {
       'Completado': 'bg-success',
@@ -244,8 +253,8 @@ class AdminManager {
     return classes[estado] || 'bg-secondary';
   }
 
+  // Configura los modales de productos y usuarios
   setupModals() {
-    // Configuración de modales
     const modalProducto = document.getElementById('modalProducto');
     if (modalProducto) {
       modalProducto.addEventListener('show.bs.modal', () => {
@@ -261,11 +270,13 @@ class AdminManager {
     }
   }
 
+  // Función para editar producto (simulada)
   editarProducto(id) {
     alert(`Editando producto: ${id}`);
     // Aquí se implementaría la lógica para cargar los datos del producto en el modal
   }
 
+  // Función para eliminar producto (simulada)
   eliminarProducto(id) {
     if (confirm(`¿Estás seguro de que quieres eliminar el producto ${id}?`)) {
       alert(`Producto ${id} eliminado`);
@@ -273,11 +284,13 @@ class AdminManager {
     }
   }
 
+  // Función para editar usuario (simulada)
   editarUsuario(id) {
     alert(`Editando usuario: ${id}`);
     // Aquí se implementaría la lógica para cargar los datos del usuario en el modal
   }
 
+  // Función para eliminar usuario (simulada)
   eliminarUsuario(id) {
     if (confirm(`¿Estás seguro de que quieres eliminar el usuario ${id}?`)) {
       alert(`Usuario ${id} eliminado`);
@@ -285,21 +298,23 @@ class AdminManager {
     }
   }
 
+  // Función para ver pedido (simulada)
   verPedido(id) {
     alert(`Viendo pedido: ${id}`);
     // Aquí se implementaría la lógica para ver los detalles del pedido
   }
 
+  // Función para editar pedido (simulada)
   editarPedido(id) {
     alert(`Editando pedido: ${id}`);
     // Aquí se implementaría la lógica para editar el pedido
   }
 }
 
-// Inicializar el admin manager
+// Inicializar el admin manager global
 const adminManager = new AdminManager();
 
-// Gráfico de ventas mensuales (ejemplo real)
+// Gráfico de ventas mensuales usando Chart.js (ejemplo real)
 document.addEventListener('DOMContentLoaded', function () {
   const ctx = document.getElementById('salesChart');
   if (ctx) {

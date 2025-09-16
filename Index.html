@@ -4,25 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/flower2.png">
+    <!-- Meta descripción para SEO -->
     <meta name="description" content="Productos frescos y naturales directo del campo a tu hogar. HuertoHogar ofrece la mejor calidad en frutas, verduras y productos orgánicos.">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/custom.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Navbar principal -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #2E8B57;">
         <div class="container">
+            <!-- Logo y nombre -->
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-flower1 me-2"></i>HuertoHogar
             </a>
-            
+            <!-- Botón menú móvil -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+            <!-- Enlaces de navegación -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -41,14 +48,15 @@
                         <a class="nav-link" href="contacto.html">Contacto</a>
                     </li>
                 </ul>
-                
                 <ul class="navbar-nav">
+                    <!-- Icono de carrito -->
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.html">
                             <i class="bi bi-cart3"></i>
                             <span class="badge bg-warning text-dark" id="cartCount">0</span>
                         </a>
                     </li>
+                    <!-- Enlaces de usuario -->
                     <li class="nav-item">
                         <a class="nav-link" href="login.html">Iniciar Sesión</a>
                     </li>
@@ -60,11 +68,12 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section: Presentación principal -->
     <section class="hero">
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
+                    <!-- Logo animado -->
                     <img src="img/huertohogarlogoconfondo.png" 
                          alt="Logo HuertoHogar" 
                          class="mb-4 mx-auto d-block animate-fade-in">
@@ -79,7 +88,7 @@
         </div>
     </section>
 
-    <!-- Beneficios -->
+    <!-- Beneficios de la tienda -->
     <section class="py-5">
         <div class="container">
             <div class="row text-center mb-5">
@@ -88,8 +97,8 @@
                     <p class="text-muted">Te ofrecemos la mejor experiencia en productos frescos y naturales</p>
                 </div>
             </div>
-            
             <div class="row">
+                <!-- Beneficio: Envío Rápido -->
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center p-4">
@@ -99,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                
+                <!-- Beneficio: Frescura Garantizada -->
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center p-4">
@@ -109,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-                
+                <!-- Beneficio: Calidad Premium -->
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center p-4">
@@ -132,7 +141,6 @@
                     <p class="text-muted">Descubre nuestros productos más populares</p>
                 </div>
             </div>
-            
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="featuredProducts">
                 <!-- Los productos se cargarán con JavaScript -->
                 <div class="col text-center">
@@ -142,14 +150,13 @@
                     <p class="mt-2">Cargando productos...</p>
                 </div>
             </div>
-            
             <div class="text-center mt-5">
                 <a href="productos.html" class="btn btn-outline-success">Ver Todos los Productos</a>
             </div>
         </div>
     </section>
 
-    <!-- Categorías -->
+    <!-- Categorías de productos -->
     <section class="py-5">
         <div class="container">
             <div class="row text-center mb-5">
@@ -158,8 +165,8 @@
                     <p class="text-muted">Explora nuestra variedad de productos frescos</p>
                 </div>
             </div>
-            
             <div class="row">
+                <!-- Categoría: Frutas Frescas -->
                 <div class="col-md-3 col-6 mb-4">
                     <a href="productos.html?categoria=frutas" class="text-decoration-none">
                         <div class="card category-card h-100 border-0 shadow-sm">
@@ -171,7 +178,7 @@
                         </div>
                     </a>
                 </div>
-                
+                <!-- Categoría: Verduras Orgánicas -->
                 <div class="col-md-3 col-6 mb-4">
                     <a href="productos.html?categoria=verduras" class="text-decoration-none">
                         <div class="card category-card h-100 border-0 shadow-sm">
@@ -183,7 +190,7 @@
                         </div>
                     </a>
                 </div>
-                
+                <!-- Categoría: Productos Orgánicos -->
                 <div class="col-md-3 col-6 mb-4">
                     <a href="productos.html?categoria=organicos" class="text-decoration-none">
                         <div class="card category-card h-100 border-0 shadow-sm">
@@ -195,7 +202,7 @@
                         </div>
                     </a>
                 </div>
-                
+                <!-- Categoría: Productos Lácteos -->
                 <div class="col-md-3 col-6 mb-4">
                     <a href="productos.html?categoria=lacteos" class="text-decoration-none">
                         <div class="card category-card h-100 border-0 shadow-sm">
@@ -211,14 +218,13 @@
         </div>
     </section>
 
-    <!-- Newsletter -->
+    <!-- Newsletter de suscripción -->
     <section class="py-5 bg-success text-white">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <h2 class="mb-3">Suscríbete a nuestro Newsletter</h2>
                     <p class="mb-4">Recibe ofertas exclusivas, recetas saludables y consejos para tu huerto urbano</p>
-                    
                     <form class="row g-2 justify-content-center">
                         <div class="col-md-6">
                             <div class="input-group">
@@ -229,17 +235,17 @@
                             </div>
                         </div>
                     </form>
-                    
                     <small class="d-block mt-3">* Nos comprometemos a no compartir tu información con terceros</small>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer principal -->
     <footer class="bg-dark text-white py-4">
         <div class="container">
             <div class="row">
+                <!-- Información de la empresa -->
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5 class="fw-bold">HuertoHogar</h5>
                     <p>Conectando a las familias chilenas con el campo desde 2019. Productos frescos y naturales directo a tu hogar.</p>
@@ -249,7 +255,7 @@
                         <a href="#" class="text-white"><i class="bi bi-twitter fs-5"></i></a>
                     </div>
                 </div>
-                
+                <!-- Enlaces rápidos -->
                 <div class="col-md-2 mb-4 mb-md-0">
                     <h5 class="fw-bold">Enlaces</h5>
                     <ul class="list-unstyled">
@@ -260,7 +266,7 @@
                         <li><a href="contacto.html" class="text-white text-decoration-none">Contacto</a></li>
                     </ul>
                 </div>
-                
+                <!-- Categorías rápidas -->
                 <div class="col-md-3 mb-4 mb-md-0">
                     <h5 class="fw-bold">Categorías</h5>
                     <ul class="list-unstyled">
@@ -270,7 +276,7 @@
                         <li><a href="productos.html?categoria=lacteos" class="text-white text-decoration-none">Productos Lácteos</a></li>
                     </ul>
                 </div>
-                
+                <!-- Información de contacto -->
                 <div class="col-md-3">
                     <h5 class="fw-bold">Contacto</h5>
                     <ul class="list-unstyled">
@@ -280,9 +286,7 @@
                     </ul>
                 </div>
             </div>
-            
             <hr class="my-4">
-            
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <p class="mb-0">&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
@@ -296,9 +300,15 @@
     </footer>
 
     <!-- Scripts -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Funciones generales -->
     <script src="js/main.js"></script>
+    <!-- Gestión de productos -->
     <script src="js/productManager.js"></script>
+    <!-- Carrito de compras -->
     <script src="js/cartManager.js"></script>
+    <!-- (Duplicado, puedes eliminar una línea si lo deseas) -->
     <script src="js/cartManager.js"></script>
-</body></html>
+</body>
+</html>
