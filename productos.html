@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HuertoHogar - Productos</title>
+    <title>Productos</title>
+    <link rel="icon" type="image/png" href="img/flower2.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body class="pt-0">
-    <!-- Navbar -->
+    <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
@@ -30,7 +31,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.html">
-                            <i class="bi bi-cart3"></i> 
+                            <i class="bi bi-cart3"></i>
                             <span class="badge bg-warning text-dark" id="cartCount">0</span>
                         </a>
                     </li>
@@ -44,7 +45,6 @@
     <!-- Contenido Principal -->
     <section class="container my-5">
         <h1 class="text-center mb-4 section-title">Nuestros Productos</h1>
-        
         <!-- Filtros -->
         <div class="row mb-4">
             <div class="col-md-6 mb-3">
@@ -65,24 +65,65 @@
                 </div>
             </div>
         </div>
-
         <!-- Grid de productos -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="productGrid">
             <!-- Los productos se cargarán con JavaScript -->
+            <div class="col text-center">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Cargando productos...</span>
+                </div>
+                <p class="mt-2">Cargando productos...</p>
+            </div>
+        </div>
+        <!-- Mensaje cuando no hay productos -->
+        <div id="noProducts" class="text-center mt-5 d-none">
+            <i class="bi bi-search display-4 text-muted"></i>
+            <h3 class="text-muted">No se encontraron productos</h3>
+            <p>Intenta con otros filtros o términos de búsqueda</p>
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="bg-dark text-white py-4">
         <div class="container text-center">
             <p>&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
         </div>
     </footer>
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/cartManager.js"></script>
     <script src="js/productManager.js"></script>
+    <script src="js/cartManager.js"></script>
+    <script>
+        // Inicializar productos cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Si hay parámetro de categoría en la URL, selecciona el filtro
+            const params = new URLSearchParams(window.location.search);
+            const categoriaParam = params.get('categoria');
+            if (categoriaParam) {
+                document.getElementById('categoriaFilter').value = categoriaParam;
+            }
+            // Inicializar el productManager si existe
+            if (window.productManager && typeof window.productManager.init === 'function') {
+                window.productManager.init();
+            }
+            // Configurar eventos de filtrado
+            const categoriaFilter = document.getElementById('categoriaFilter');
+            const searchProduct = document.getElementById('searchProduct');
+            if (categoriaFilter) {
+                categoriaFilter.addEventListener('change', function() {
+                    if (window.productManager && typeof window.productManager.filterProducts === 'function') {
+                        window.productManager.filterProducts();
+                    }
+                });
+            }
+            if (searchProduct) {
+                searchProduct.addEventListener('input', function() {
+                    if (window.productManager && typeof window.productManager.filterProducts === 'function') {
+                        window.productManager.filterProducts();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

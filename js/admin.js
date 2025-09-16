@@ -298,3 +298,41 @@ class AdminManager {
 
 // Inicializar el admin manager
 const adminManager = new AdminManager();
+
+// Gráfico de ventas mensuales (ejemplo real)
+document.addEventListener('DOMContentLoaded', function () {
+  const ctx = document.getElementById('salesChart');
+  if (ctx) {
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ],
+        datasets: [{
+          label: 'Ventas ($ CLP)',
+          data: [120000, 95000, 134000, 150000, 170000, 160000, 180000, 175000, 190000, 210000, 220000, 245000],
+          backgroundColor: '#2E8B57'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return '$' + value.toLocaleString('es-CL');
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+});
