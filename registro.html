@@ -3,35 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosotros</title>
+    <title>Registro</title>
     <link rel="icon" type="image/png" href="img/flower2.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Barra de navegación -->
+    <!-- Barra de navegacion -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
         <div class="container">
-            <!-- Logo y nombre del sitio -->
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-flower1 me-2"></i>HuertoHogar
             </a>
-            <!-- Botón para menú colapsable en móvil -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Enlaces de navegación -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="nosotros.html">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
                 </ul>
-                <!-- Icono de carrito y enlaces de usuario -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.html">
@@ -40,7 +36,7 @@
                         </a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>
-                    <li class="nav-item"><a class="nav-link" href="registro.html">Registrarse</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="registro.html">Registrarse</a></li>
                 </ul>
             </div>
         </div>
@@ -48,171 +44,145 @@
 
     <!-- Contenido Principal -->
     <main class="container my-5">
-        <!-- Historia de la empresa -->
-        <section class="row align-items-center mb-5">
-            <div class="col-lg-6">
-                <h1 class="section-title mb-4">Sobre HuertoHogar</h1>
-                <p class="lead">Conectando a las familias chilenas con el campo desde 2019</p>
-                <p>HuertoHogar nació con la misión de llevar la frescura y calidad de los productos del campo directamente a la puerta de nuestros clientes. Con más de 6 años de experiencia, hemos crecido hasta operar en más de 9 puntos a lo largo de Chile.</p>
-                <p>Nuestro compromiso es con la sostenibilidad, la salud y el apoyo a los agricultores locales. Cada producto que ofrecemos es seleccionado cuidadosamente para garantizar la máxima calidad y frescura.</p>
-            </div>
-            <div class="col-lg-6">
-                <img src="img/CampoChileno.avif"
-                     alt="Campo chileno" class="img-fluid rounded shadow">
-            </div>
-        </section>
-        <!-- Misión y Visión -->
-        <section class="row mb-5">
-            <div class="col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-bullseye display-4 mb-3" style="color: #2E8B57;"></i>
-                        <h3 class="card-title">Misión</h3>
-                        <p class="card-text">Proporcionar productos frescos y de calidad directamente desde el campo hasta la puerta de nuestros clientes, garantizando la frescura y el sabor en cada entrega.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-eye display-4 mb-3" style="color: #2E8B57;"></i>
-                        <h3 class="card-title">Visión</h3>
-                        <p class="card-text">Ser la tienda online líder en la distribución de productos frescos y naturales en Chile, reconocida por nuestra calidad excepcional y compromiso con la sostenibilidad.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Valores -->
-        <section class="mb-5">
-            <h2 class="text-center section-title mb-4">Nuestros Valores</h2>
-            <div class="row">
-                <div class="col-md-3 col-6 text-center mb-4">
-                    <i class="bi bi-tree fs-1 mb-3" style="color: #2E8B57;"></i>
-                    <h5>Sostenibilidad</h5>
-                    <p class="text-muted">Promovemos prácticas agrícolas responsables con el medio ambiente</p>
-                </div>
-                <div class="col-md-3 col-6 text-center mb-4">
-                    <i class="bi bi-heart fs-1 mb-3" style="color: #2E8B57;"></i>
-                    <h5>Calidad</h5>
-                    <p class="text-muted">Productos seleccionados con los más altos estándares de calidad</p>
-                </div>
-                <div class="col-md-3 col-6 text-center mb-4">
-                    <i class="bi bi-people fs-1 mb-3" style="color: #2E8B57;"></i>
-                    <h5>Comunidad</h5>
-                    <p class="text-muted">Apoyamos a agricultores y comunidades locales</p>
-                </div>
-                <div class="col-md-3 col-6 text-center mb-4">
-                    <i class="bi bi-shield-check fs-1 mb-3" style="color: #2E8B57;"></i>
-                    <h5>Confianza</h5>
-                    <p class="text-muted">Transparencia en cada etapa de nuestro proceso</p>
-                </div>
-            </div>
-        </section>
-        <!-- Mapa y listado de tiendas físicas -->
-        <section class="mb-5">
-            <h2 class="text-center section-title mb-4">Nuestras Tiendas</h2>
-            <p class="text-center mb-4">Contamos con presencia en las principales ciudades de Chile</p>
-            <div class="row">
-                <!-- Listado de ubicaciones -->
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0"><i class="bi bi-geo-alt me-2"></i>Ubicaciones</h5>
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-person-plus display-4" style="color: #2E8B57;"></i>
+                            <h2 class="card-title text-center mt-2 section-title">Crear Cuenta</h2>
+                            <p class="text-muted">Regístrate para disfrutar de todos nuestros servicios</p>
                         </div>
-                        <div class="card-body">
-                            <div class="list-group">
-                                <!-- Cada item es una tienda física -->
-                                <div class="list-group-item">
-                                    <i class="bi bi-geo-fill me-2 text-success"></i>
-                                    <strong>Santiago</strong> - Av. Principal 123
+                        <form id="formRegistro" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                        <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required maxlength="100">
+                                    </div>
+                                    <div class="invalid-feedback" id="nombreError">
+                                        El nombre es requerido (máx. 100 caracteres)
+                                    </div>
                                 </div>
-                                <div class="list-group-item">
-                                    <i class="bi bi-geo-fill me-2 text-success"></i>
-                                    <strong>Puerto Montt</strong> - Costanera 456
-                                </div>
-                                <div class="list-group-item">
-                                    <i class="bi bi-geo-fill me-2 text-success"></i>
-                                    <strong>Villarica</strong> - Calle Lagos 789
-                                </div>
-                                <div class="list-group-item">
-                                    <i class="bi bi-geo-fill me-2 text-success"></i>
-                                    <strong>Viña del Mar</strong> - Av. del Mar 321
-                                </div>
-                                <div class="list-group-item">
-                                    <i class="bi bi-geo-fill me-2 text-success"></i>
-                                    <strong>Valparaíso</strong> - Cerro Alegre 654
-                                </div>
-                                <div class="list-group-item">
-                                    <i class="bi bi-geo-fill me-2 text-success"></i>
-                                    <strong>Concepción</strong> - Barrio Universitario 987
+                                <div class="col-md-6 mb-3">
+                                    <label for="apellido" class="form-label">Apellido</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                        <input type="text" class="form-control" id="apellido" placeholder="Tu apellido" required maxlength="100">
+                                    </div>
+                                    <div class="invalid-feedback" id="apellidoError">
+                                        El apellido es requerido (máx. 100 caracteres)
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Mapa de ubicaciones-->
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0"><i class="bi bi-map me-2"></i>Mapa de Ubicaciones</h5>
-                        </div>
-                        <div class="card-body">
-                            <div id="mapa" style="height: 300px; background-color: #e9ecef; border-radius: 0.375rem;" class="d-flex align-items-center justify-content-center">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="run" class="form-label">RUN (sin puntos, con guión)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-card-checklist"></i></span>
+                                        <input type="text" class="form-control" id="run" placeholder="12345678-9" required>
+                                    </div>
+                                    <div class="invalid-feedback" id="runError">
+                                        El RUN no es válido. Formato: 12345678-9 (sin puntos, con guión)
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="correo" class="form-label">Correo Electrónico</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                        <input type="email" class="form-control" id="correo" placeholder="tu@email.com" required>
+                                    </div>
+                                    <div class="invalid-feedback" id="correoError">
+                                        Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="contraseña" class="form-label">Contraseña</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                        <input type="password" class="form-control" id="contraseña" placeholder="Tu contraseña" required minlength="4" maxlength="10">
+                                        <button class="btn btn-outline-secondary" type="button" id="togglePasswordRegistro">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div class="invalid-feedback" id="contraseñaError">
+                                        La contraseña debe tener entre 4 y 10 caracteres
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="confirmarContraseña" class="form-label">Confirmar Contraseña</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                        <input type="password" class="form-control" id="confirmarContraseña" placeholder="Repite tu contraseña" required>
+                                    </div>
+                                    <div class="invalid-feedback" id="confirmarContraseñaError">
+                                        Las contraseñas no coinciden
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="region" class="form-label">Región</label>
+                                    <select class="form-select" id="region" required>
+                                        <option value="">Selecciona una región</option>
+                                        <!-- Las regiones se cargarán con JavaScript -->
+                                    </select>
+                                    <div class="invalid-feedback" id="regionError">
+                                        La región es requerida
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="comuna" class="form-label">Comuna</label>
+                                    <select class="form-select" id="comuna" required>
+                                        <option value="">Selecciona una comuna</option>
+                                        <!-- Las comunas se cargarán con JavaScript -->
+                                    </select>
+                                    <div class="invalid-feedback" id="comunaError">
+                                        La comuna es requerida
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="direccion" class="form-label">Dirección</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-house"></i></span>
+                                    <input type="text" class="form-control" id="direccion" placeholder="Tu dirección completa" required maxlength="200">
+                                </div>
+                                <div class="invalid-feedback" id="direccionError">
+                                    La dirección es requerida (máx. 200 caracteres)
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="terminos" required>
+                                <label class="form-check-label" for="terminos">
+                                    Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a>
+                                </label>
+                                <div class="invalid-feedback">
+                                    Debes aceptar los términos y condiciones
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2">
+                                <i class="bi bi-person-plus me-2"></i>Crear Cuenta
+                            </button>
+                            <hr class="my-4">
+                            <div class="text-center">
+                                <p class="mb-0">¿Ya tienes una cuenta?</p>
+                                <a href="login.html" class="btn btn-outline-success mt-2">Iniciar Sesión</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Equipo de trabajo -->
-        <section>
-            <h2 class="text-center section-title mb-4">Nuestro Equipo</h2>
-            <div class="row">
-                <!-- integrantes del equipo -->
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center border-0 shadow-sm">
-                        <img src="img/danilo.jpg" class="team-photo img-fluid" alt="Danilo Celis">
-                        <div class="card-body">
-                            <h5 class="card-title">Danilo Celis</h5>
-                            <p class="text-muted">Testing</p>
-                            <p class="card-text">Estudiante De Ingenieria Informatica.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center border-0 shadow-sm">
-                        <img src="img/matias.jpg" class="team-photo img-fluid" alt="Matias Guzman">
-                        <div class="card-body">
-                            <h5 class="card-title">Matias Guzman</h5>
-                            <p class="text-muted">Backend</p>
-                            <p class="card-text">Estudiante De Ingenieria Informatica.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center border-0 shadow-sm">
-                        <img src="img/felipe.jpg" class="team-photo img-fluid" alt="Felipe Quezada">
-                        <div class="card-body">
-                            <h5 class="card-title">Felipe Quezada</h5>
-                            <p class="text-muted">Frontend</p>
-                            <p class="card-text">Estudiante De Ingenieria Informatica.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
 
-    <!-- Información legal y redes sociales -->
+    <!-- Footer -->
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container text-center">
             <p>&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
-            <div class="mt-2">
-                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
-            </div>
         </div>
     </footer>
 
@@ -220,8 +190,100 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cartManager.js"></script>
-    <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7ufzK8501YBypW71ZLYdt1_-gDgZcWFM"></script>
-    <script src="js/mapa.js"></script>
+    <script src="js/validaciones.js"></script>
+    <script>
+        // Regiones y comunas de ejemplo
+        const regionesComunas = {
+            "Región Metropolitana": ["Santiago", "Puente Alto", "Maipú"],
+            "Valparaíso": ["Valparaíso", "Viña del Mar", "Quilpué"],
+            "Biobío": ["Concepción", "Los Ángeles", "Talcahuano"]
+        };
+
+        function cargarRegiones(selectId) {
+            const select = document.getElementById(selectId);
+            if (!select) return;
+
+            select.innerHTML = '<option value="">Selecciona una región</option>';
+            Object.keys(regionesComunas).forEach(region => {
+                const opt = document.createElement('option');
+                opt.value = region;
+                opt.textContent = region;
+                select.appendChild(opt);
+            });
+        }
+
+        function cargarComunas(region, selectId) {
+            const select = document.getElementById(selectId);
+            select.innerHTML = '<option value="">Selecciona una comuna</option>';
+
+            if (regionesComunas[region]) {
+                regionesComunas[region].forEach(comuna => {
+                    const opt = document.createElement('option');
+                    opt.value = comuna;
+                    opt.textContent = comuna;
+                    select.appendChild(opt);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarRegiones('region');
+
+            document.getElementById('region').addEventListener('change', function() {
+                cargarComunas(this.value, 'comuna');
+            });
+
+            // Mostrar/ocultar contraseña
+            const togglePassword = document.getElementById('togglePasswordRegistro');
+            const passwordInput = document.getElementById('contraseña');
+
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+                });
+            }
+
+            // Validación del formulario
+            const formRegistro = document.getElementById('formRegistro');
+            if (formRegistro) {
+                formRegistro.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    if (validarRegistroForm()) {
+                        // Guardar usuario
+                        const usuario = {
+                            nombre: document.getElementById('nombre').value,
+                            apellido: document.getElementById('apellido').value,
+                            run: document.getElementById('run').value,
+                            email: document.getElementById('correo').value,
+                            password: document.getElementById('contraseña').value,
+                            region: document.getElementById('region').value,
+                            comuna: document.getElementById('comuna').value,
+                            direccion: document.getElementById('direccion').value,
+                            role: 'cliente'
+                        };
+
+                        // Guardar en localStorage
+                        let usuarios = JSON.parse(localStorage.getItem('huertohogar_usuarios')) || [];
+                        usuarios.push(usuario);
+                        localStorage.setItem('huertohogar_usuarios', JSON.stringify(usuarios));
+
+                        // Mostrar mensaje de éxito
+                        if (typeof showToast === 'function') {
+                            showToast('¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.', 'success');
+                        }
+
+                        // Redirigir al login después de 2 segundos
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 2000);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
+
