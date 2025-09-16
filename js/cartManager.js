@@ -1,253 +1,290 @@
-// Clase principal para la gestión avanzada del carrito de compras
+/**
+ * Manejador del carrito de compras para HuertoHogar
+ * Gestiona todas las operaciones del carrito usando localStorage
+ */
+
 class CartManager {
     constructor() {
-        // Inicializa el carrito desde localStorage o como array vacío
-        this.cart = JSON.parse(localStorage.getItem('huertohogar_cart')) || [];
-        this.updateCartCount(); // Actualiza el contador de productos en el icono del carrito
+        this.cart = this.getCart();
+        this.shippingCost = 3500; // Costo de envío fijo
     }
 
-    // Agrega un producto al carrito (por ID y cantidad)
+    /**
+     * Obtiene el carrito del localStorage
+     * @returns {Array} Contenido del carrito
+     */
+    getCart() {
+        return JSON.parse(localStorage.getItem('huertohogar_carrito')) || [];
+    }
+
+    /**
+     * Guarda el carrito en el localStorage
+     * @param {Array} cart - Carrito a guardar
+     */
+    saveCart(cart) {
+        localStorage.setItem('huertohogar_carrito', JSON.stringify(cart));
+    }
+
+    /**
+     * Añade un producto al carrito
+     * @param {string} productId - ID del producto a añadir
+     * @param {number} quantity - Cantidad a añadir (por defecto 1)
+     * @returns {boolean} True si se añadió correctamente
+     */
     addToCart(productId, quantity = 1) {
-        // Obtiene la lista de productos desde productManager o una lista local
-        const products = window.productManager ? window.productManager.products : this.getLocalProducts();
+        // Obtener productos del localStorage
+        const products = JSON.parse(localStorage.getItem('huertohogar_productos')) || [];
         const product = products.find(p => p.id === productId);
         
         if (!product) {
-            this.showAlert('Producto no encontrado', 'danger');
-            return;
+            this.showToast('Producto no encontrado', 'danger');
+            return false;
         }
-
-        // Si el producto ya está en el carrito, suma la cantidad
-        const existingItem = this.cart.find(item => item.id === productId);
-        if (existingItem) {
-            existingItem.quantity += quantity;
+        
+        if (product.stock < quantity) {
+            this.showToast('No hay suficiente stock disponible', 'warning');
+            return false;
+        }
+        
+        // Buscar si el producto ya está en el carrito
+        const existingItemIndex = this.cart.findIndex(item => item.id === productId);
+        
+        if (existingItemIndex !== -1) {
+            // Actualizar cantidad si ya existe
+            const newQuantity = this.cart[existingItemIndex].cantidad + quantity;
+            
+            if (newQuantity > product.stock) {
+                this.showToast('No hay suficiente stock disponible', 'warning');
+                return false;
+            }
+            
+            this.cart[existingItemIndex].cantidad = newQuantity;
         } else {
-            // Si no está, lo agrega como nuevo
+            // Añadir nuevo producto al carrito
             this.cart.push({
                 id: product.id,
                 nombre: product.nombre,
                 precio: product.precio,
                 imagen: product.imagen,
-                quantity: quantity
+                cantidad: quantity
             });
         }
-
-        this.saveCart(); // Guarda el carrito en localStorage
-        this.showAddedToCartAlert(product.nombre); // Muestra alerta de éxito
+        
+        // Guardar carrito actualizado
+        this.saveCart(this.cart);
+        this.updateCartCount();
+        
+        this.showToast('Producto añadido al carrito', 'success');
+        return true;
     }
 
-    // Elimina un producto del carrito por su ID
+    /**
+     * Elimina un producto del carrito
+     * @param {string} productId - ID del producto a eliminar
+     * @returns {boolean} True si se eliminó correctamente
+     */
     removeFromCart(productId) {
+        const initialLength = this.cart.length;
         this.cart = this.cart.filter(item => item.id !== productId);
-        this.saveCart();
-        // Si existe la función de renderizado, la ejecuta para actualizar la vista
-        if (typeof this.renderCart === 'function') {
-            this.renderCart();
+        
+        if (this.cart.length < initialLength) {
+            this.saveCart(this.cart);
+            this.updateCartCount();
+            this.showToast('Producto eliminado del carrito', 'success');
+            return true;
         }
+        
+        this.showToast('Producto no encontrado en el carrito', 'warning');
+        return false;
     }
 
-    // Actualiza la cantidad de un producto en el carrito
+    /**
+     * Actualiza la cantidad de un producto en el carrito
+     * @param {string} productId - ID del producto a actualizar
+     * @param {number} newQuantity - Nueva cantidad
+     * @returns {boolean} True si se actualizó correctamente
+     */
     updateQuantity(productId, newQuantity) {
-        const item = this.cart.find(item => item.id === productId);
-        if (item) {
-            item.quantity = Math.max(1, newQuantity); // No permite cantidades menores a 1
-            this.saveCart();
-            if (typeof this.renderCart === 'function') {
-                this.renderCart();
-            }
+        const itemIndex = this.cart.findIndex(item => item.id === productId);
+        
+        if (itemIndex === -1) {
+            this.showToast('Producto no encontrado en el carrito', 'warning');
+            return false;
         }
+        
+        if (newQuantity <= 0) {
+            return this.removeFromCart(productId);
+        }
+        
+        // Verificar stock disponible
+        const products = JSON.parse(localStorage.getItem('huertohogar_productos')) || [];
+        const product = products.find(p => p.id === productId);
+        
+        if (!product) {
+            this.showToast('Producto no encontrado en el inventario', 'danger');
+            return this.removeFromCart(productId);
+        }
+        
+        if (newQuantity > product.stock) {
+            this.showToast('No hay suficiente stock disponible', 'warning');
+            return false;
+        }
+        
+        this.cart[itemIndex].cantidad = newQuantity;
+        this.saveCart(this.cart);
+        this.updateCartCount();
+        return true;
     }
 
-    // Vacía todo el carrito, con confirmación
+    /**
+     * Vacía todo el carrito
+     * @returns {boolean} True si se vació correctamente
+     */
     clearCart() {
         if (this.cart.length === 0) {
-            this.showAlert('El carrito ya está vacío', 'info');
-            return;
+            this.showToast('El carrito ya está vacío', 'info');
+            return false;
         }
-
-        if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
-            this.cart = [];
-            this.saveCart();
-            this.showAlert('Carrito vaciado', 'success');
-            if (typeof this.renderCart === 'function') {
-                this.renderCart();
-            }
-        }
-    }
-
-    // Calcula el total del carrito (sin envío)
-    getTotal() {
-        return this.cart.reduce((total, item) => total + (item.precio * item.quantity), 0);
-    }
-
-    // Devuelve el subtotal (igual al total en este caso)
-    getSubtotal() {
-        return this.getTotal();
-    }
-
-    // Calcula el costo de envío (fijo si hay productos)
-    getShipping() {
-        return this.cart.length > 0 ? 2500 : 0;
-    }
-
-    // Devuelve el total final (subtotal + envío)
-    getGrandTotal() {
-        return this.getTotal() + this.getShipping();
-    }
-
-    // Guarda el carrito en localStorage y actualiza el contador
-    saveCart() {
-        localStorage.setItem('huertohogar_cart', JSON.stringify(this.cart));
+        
+        this.cart = [];
+        this.saveCart(this.cart);
         this.updateCartCount();
-    }
-
-    // Actualiza el contador de productos en el icono del carrito (puede haber varios en la página)
-    updateCartCount() {
-        const count = this.cart.reduce((sum, item) => sum + item.quantity, 0);
-        const cartCountElements = document.querySelectorAll('#cartCount');
-        cartCountElements.forEach(element => {
-            element.textContent = count;
-        });
-    }
-
-    // Muestra una alerta tipo toast cuando se agrega un producto
-    showAddedToCartAlert(productName) {
-        this.showAlert(`${productName} añadido al carrito`, 'success');
-    }
-
-    // Muestra un toast de Bootstrap con mensaje y tipo (success, info, danger, etc)
-    showAlert(message, type = 'info') {
-        // Usa un contenedor de toasts, lo crea si no existe
-        const toastContainer = document.getElementById('toastContainer') || this.createToastContainer();
         
-        const toast = document.createElement('div');
-        toast.className = `toast align-items-center text-white bg-${type}`;
-        toast.setAttribute('role', 'alert');
-        toast.innerHTML = `
-            <div class="d-flex">
-                <div class="toast-body">
-                    <i class="bi ${type === 'success' ? 'bi-check-circle-fill' : 'bi-info-circle-fill'} me-2"></i>
-                    ${message}
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-            </div>
-        `;
-        
-        toastContainer.appendChild(toast);
-        const bsToast = new bootstrap.Toast(toast);
-        bsToast.show();
-        
-        // Elimina el toast del DOM cuando termina la animación
-        toast.addEventListener('hidden.bs.toast', () => {
-            toast.remove();
-        });
+        this.showToast('Carrito vaciado', 'success');
+        return true;
     }
 
-    // Crea el contenedor de toasts si no existe
-    createToastContainer() {
-        const container = document.createElement('div');
-        container.id = 'toastContainer';
-        container.className = 'toast-container position-fixed top-0 end-0 p-3';
-        document.body.appendChild(container);
-        return container;
+    /**
+     * Calcula el subtotal del carrito
+     * @returns {number} Subtotal del carrito
+     */
+    calculateSubtotal() {
+        return this.cart.reduce((total, item) => total + (item.precio * item.cantidad), 0);
     }
 
-    // Renderiza el carrito en la tabla HTML correspondiente
+    /**
+     * Calcula el costo de envío
+     * @returns {number} Costo de envío
+     */
+    calculateShipping() {
+        return this.cart.length > 0 ? this.shippingCost : 0;
+    }
+
+    /**
+     * Calcula el total del carrito (subtotal + envío)
+     * @returns {number} Total del carrito
+     */
+    calculateTotal() {
+        return this.calculateSubtotal() + this.calculateShipping();
+    }
+
+    /**
+     * Obtiene el número total de items en el carrito
+     * @returns {number} Cantidad total de items
+     */
+    getTotalItems() {
+        return this.cart.reduce((total, item) => total + item.cantidad, 0);
+    }
+
+    /**
+     * Verifica si el carrito está vacío
+     * @returns {boolean} True si el carrito está vacío
+     */
+    isEmpty() {
+        return this.cart.length === 0;
+    }
+
+    /**
+     * Renderiza el carrito en la página (para carrito.html)
+     */
     renderCart() {
         const cartTable = document.getElementById('cartTable');
-        const cartTotal = document.getElementById('cartTotal');
-        const subtotal = document.getElementById('subtotal');
-        const shipping = document.getElementById('shipping');
+        const subtotalEl = document.getElementById('subtotal');
+        const shippingEl = document.getElementById('shipping');
+        const totalEl = document.getElementById('cartTotal');
         
-        if (!cartTable) return;
-
-        if (this.cart.length === 0) {
-            cartTable.innerHTML = '<tr><td colspan="5" class="text-center py-4">Tu carrito está vacío</td></tr>';
-            if (cartTotal) cartTotal.textContent = '0';
-            if (subtotal) subtotal.textContent = '0';
-            if (shipping) shipping.textContent = '0';
+        if (!cartTable || !subtotalEl || !shippingEl || !totalEl) return;
+        
+        if (this.isEmpty()) {
+            cartTable.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center py-5">
+                        <i class="bi bi-cart-x display-1 text-muted"></i>
+                        <h4 class="mt-3">Tu carrito está vacío</h4>
+                        <a href="productos.html" class="btn btn-primary mt-3">Ver productos</a>
+                    </td>
+                </tr>
+            `;
+            subtotalEl.textContent = '0';
+            shippingEl.textContent = '0';
+            totalEl.textContent = '0';
             return;
         }
-
-        // Genera las filas de la tabla con los productos del carrito
-        cartTable.innerHTML = this.cart.map(item => `
-            <tr class="fade-in">
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="${item.imagen}" alt="${item.nombre}" class="rounded me-3 product-img product-img-sm img-fluid">
-                        <span>${item.nombre}</span>
-                    </div>
-                </td>
-                <td>$${item.precio.toLocaleString('es-CL')}</td>
-                <td>
-                    <div class="input-group" style="width: 120px;">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cartManager.updateQuantity('${item.id}', ${item.quantity - 1})">-</button>
-                        <input type="number" class="form-control text-center" value="${item.quantity}" min="1" 
-                               onchange="cartManager.updateQuantity('${item.id}', parseInt(this.value))">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cartManager.updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
-                    </div>
-                </td>
-                <td>$${(item.precio * item.quantity).toLocaleString('es-CL')}</td>
-                <td>
-                    <button class="btn btn-danger btn-sm" onclick="cartManager.removeFromCart('${item.id}')">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </td>
-            </tr>
-        `).join('');
-
-        // Actualiza los totales en la vista
-        if (cartTotal) cartTotal.textContent = this.getGrandTotal().toLocaleString('es-CL');
-        if (subtotal) subtotal.textContent = this.getSubtotal().toLocaleString('es-CL');
-        if (shipping) shipping.textContent = this.getShipping().toLocaleString('es-CL');
+        
+        cartTable.innerHTML = this.cart.map(item => {
+            const subtotal = item.precio * item.cantidad;
+            return `
+                <tr>
+                    <td>
+                        <img src="${item.imagen}" class="product-img-sm me-2" alt="${item.nombre}">
+                        ${item.nombre}
+                    </td>
+                    <td>$${item.precio.toLocaleString('es-CL')}</td>
+                    <td>
+                        <input type="number" class="form-control input-cantidad-carrito" min="1" max="99" 
+                               value="${item.cantidad}" 
+                               onchange="cartManager.updateQuantity('${item.id}', this.value); cartManager.renderCart();">
+                    </td>
+                    <td>$${subtotal.toLocaleString('es-CL')}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" 
+                                onclick="cartManager.removeFromCart('${item.id}'); cartManager.renderCart();">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+        
+        subtotalEl.textContent = this.calculateSubtotal().toLocaleString('es-CL');
+        shippingEl.textContent = this.calculateShipping().toLocaleString('es-CL');
+        totalEl.textContent = this.calculateTotal().toLocaleString('es-CL');
     }
 
-    // Devuelve una lista local de productos si no existe productManager
-    getLocalProducts() {
-        return [
-            {
-                id: 'FR001',
-                nombre: 'Manzanas Fuji',
-                precio: 1200,
-                imagen: 'img/manzana.jpg',
-                categoria: 'frutas'
-            },
-            {
-                id: 'FR002',
-                nombre: 'Naranjas Valencia',
-                precio: 1000,
-                imagen: 'img/naranja.jpg',
-                categoria: 'frutas'
-            },
-            {
-                id: 'VR001',
-                nombre: 'Zanahorias Orgánicas',
-                precio: 900,
-                imagen: 'img/zanahoria.jpg',
-                categoria: 'verduras'
-            },
-            {
-                id: 'VR002',
-                nombre: 'Espinacas Frescas',
-                precio: 700,
-                imagen: 'img/espinaca.jpg',
-                categoria: 'verduras'
-            },
-            {
-                id: 'PO001',
-                nombre: 'Miel Orgánica',
-                precio: 5000,
-                imagen: 'img/miel.jpg',
-                categoria: 'organicos'
-            }
-        ];
+    /**
+     * Actualiza el contador de carrito en la navbar
+     */
+    updateCartCount() {
+        const cartCount = document.getElementById('cartCount');
+        if (cartCount) {
+            cartCount.textContent = this.getTotalItems();
+            cartCount.style.display = this.getTotalItems() > 0 ? 'inline' : 'none';
+        }
+    }
+
+    /**
+     * Muestra una notificación toast
+     * @param {string} message - Mensaje a mostrar
+     * @param {string} type - Tipo de toast (success, danger, warning, info)
+     */
+    showToast(message, type = 'info') {
+        // Usar la función global showToast si existe, si no usar alert
+        if (typeof window.showToast === 'function') {
+            window.showToast(message, type);
+        } else {
+            alert(message);
+        }
     }
 }
 
-// Inicializar el carrito global
+// Instancia global del manejador del carrito
 const cartManager = new CartManager();
 
-// Función global para añadir al carrito
-function addToCart(productId, quantity = 1) {
-    cartManager.addToCart(productId, quantity);
-}
+// Inicializar el carrito cuando se carga la página
+document.addEventListener('DOMContentLoaded', function() {
+    // Renderizar carrito solo si existe la tabla
+    if (document.getElementById('cartTable')) {
+        cartManager.renderCart();
+    }
+    cartManager.updateCartCount();
+});

@@ -1,331 +1,167 @@
-// Funciones de validación generales
+// Validaciones centralizadas para HuertoHogar
 
-/**
- * Muestra un mensaje al usuario.
- * Usa el toast de cartManager si está disponible, si no, usa alert.
- */
+// -- Validación de Email --
+function validarEmail(email) {
+    if (!email) return false;
+    if (email.length > 100) return false;
+    // Solo dominios permitidos
+    const regex = /^[\w.-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
+    return regex.test(email.trim());
+}
+
+// -- Validación de Contraseña --
+function validarPassword(pass) {
+    if (!pass) return false;
+    return pass.length >= 4 && pass.length <= 10;
+}
+
+// -- Validación de Nombre (registro/contacto) --
+function validarNombre(nombre) {
+    if (!nombre) return false;
+    return nombre.trim().length > 0 && nombre.trim().length <= 100;
+}
+
+// -- Validación de Apellido (registro) --
+function validarApellido(apellido) {
+    if (!apellido) return false;
+    return apellido.trim().length > 0 && apellido.trim().length <= 100;
+}
+
+// -- Validación de RUN chileno --
+function validarRun(run) {
+    if (!run) return false;
+    const regex = /^[0-9]{7,8}-[0-9kK]$/;
+    return regex.test(run.trim());
+}
+
+// -- Validación de Comentario (contacto) --
+function validarComentario(comentario) {
+    if (!comentario) return false;
+    return comentario.trim().length > 0 && comentario.trim().length <= 500;
+}
+
+// -- Validación de Teléfono (perfil) --
+function validarTelefono(telefono) {
+    if (!telefono) return false;
+    // Solo números, 8 o 9 dígitos (Chile)
+    return /^[0-9]{8,9}$/.test(telefono.trim());
+}
+
+// -- Validación de Dirección (perfil/registro) --
+function validarDireccion(direccion) {
+    if (!direccion) return false;
+    return direccion.trim().length > 0 && direccion.trim().length <= 200;
+}
+
+// -- Validación de Región y Comuna --
+function validarRegion(region) {
+    return !!region;
+}
+
+function validarComuna(comuna) {
+    return !!comuna;
+}
+
+// -- Validación de registro (solo datos, para uso JS) --
+function validarRegistro({nombre, apellido, run, email, password, confirmarPassword, region, comuna, direccion, terminos}) {
+    let errores = {};
+    
+    if (!validarNombre(nombre)) errores.nombre = "Nombre obligatorio (máx. 100 caracteres)";
+    if (!validarApellido(apellido)) errores.apellido = "Apellido obligatorio (máx. 100 caracteres)";
+    if (!validarRun(run)) errores.run = "RUN obligatorio y formato válido (12345678-9)";
+    if (!validarEmail(email)) errores.email = "Correo obligatorio y debe ser @duoc.cl, @profesor.duoc.cl o @gmail.com";
+    if (!validarPassword(password)) errores.password = "Contraseña obligatoria (4-10 caracteres)";
+    if (password !== confirmarPassword) errores.confirmarPassword = "Las contraseñas no coinciden";
+    if (!validarRegion(region)) errores.region = "Región obligatoria";
+    if (!validarComuna(comuna)) errores.comuna = "Comuna obligatoria";
+    if (!validarDireccion(direccion)) errores.direccion = "Dirección obligatoria (máx. 200 caracteres)";
+    if (!terminos) errores.terminos = "Debes aceptar los términos y condiciones";
+    
+    return errores;
+}
+
+// -- Validación de login --
+function validarLogin({email, password}) {
+    let errores = {};
+    
+    if (!validarEmail(email)) errores.email = "Correo obligatorio y debe ser válido";
+    if (!validarPassword(password)) errores.password = "Contraseña obligatoria (4-10 caracteres)";
+    
+    return errores;
+}
+
+// -- Validación de contacto --
+function validarContacto({nombre, email, comentario}) {
+    let errores = {};
+    
+    if (!validarNombre(nombre)) errores.nombre = "Nombre obligatorio (máx. 100 caracteres)";
+    if (!validarEmail(email)) errores.email = "Correo obligatorio y debe ser válido";
+    if (!validarComentario(comentario)) errores.comentario = "Comentario obligatorio (máx. 500 caracteres)";
+    
+    return errores;
+}
+
+// -- Validación de actualización de perfil --
+function validarPerfil({direccion, telefono}) {
+    let errores = {};
+    
+    if (!validarDireccion(direccion)) errores.direccion = "Dirección obligatoria (máx. 200 caracteres)";
+    if (!validarTelefono(telefono)) errores.telefono = "Teléfono obligatorio (8-9 dígitos)";
+    
+    return errores;
+}
+
+// -- Validación y guardado del formulario de registro (para registro.html) --
+function validarRegistroForm() {
+    // Obtener campos
+    const nombre = document.getElementById('nombre').value.trim();
+    const apellido = document.getElementById('apellido').value.trim();
+    const run = document.getElementById('run').value.trim();
+    const email = document.getElementById('correo').value.trim();
+    const password = document.getElementById('contraseña').value;
+    const confirmarPassword = document.getElementById('confirmarContraseña').value;
+    const region = document.getElementById('region').value;
+    const comuna = document.getElementById('comuna').value;
+    const direccion = document.getElementById('direccion').value.trim();
+    const terminos = document.getElementById('terminos').checked;
+
+    // Validar
+    const errores = validarRegistro({
+        nombre, apellido, run, email, password, confirmarPassword, region, comuna, direccion, terminos
+    });
+
+    // Limpiar feedback
+    ['nombre','apellido','run','correo','contraseña','confirmarContraseña','region','comuna','direccion','terminos'].forEach(id => {
+        const input = document.getElementById(id);
+        if (input) input.classList.remove('is-invalid', 'is-valid');
+    });
+
+    // Mostrar errores
+    let hayErrores = false;
+    for (const campo in errores) {
+        const input = document.getElementById(campo);
+        if (input) input.classList.add('is-invalid');
+        hayErrores = true;
+    }
+
+    // Validar email duplicado
+    let usuarios = JSON.parse(localStorage.getItem('huertohogar_usuarios')) || [];
+    if (!errores.email && usuarios.some(u => u.email === email)) {
+        document.getElementById('correo').classList.add('is-invalid');
+        mostrarMensaje('El correo ya está registrado', 'danger');
+        return false;
+    }
+
+    if (hayErrores) return false;
+
+    return true;
+}
+
+// -- Utilidad para mostrar mensajes (usa showToast si existe, si no alert) --
 function mostrarMensaje(mensaje, tipo = 'info') {
-    if (typeof cartManager !== 'undefined' && typeof cartManager.showAlert === 'function') {
-        cartManager.showAlert(mensaje, tipo);
+    if (typeof showToast === 'function') {
+        showToast(mensaje, tipo);
     } else {
         alert(mensaje);
     }
-}
-
-/**
- * Valida si el email es de los dominios permitidos.
- */
-function validarEmail(email) {
-    const emailRegex = /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/;
-    return emailRegex.test(email);
-}
-
-/**
- * Valida la longitud de un texto entre un mínimo y máximo.
- */
-function validarLongitud(texto, min, max) {
-    return texto.length >= min && texto.length <= max;
-}
-
-// -------- Validaciones para Login --------
-
-/**
- * Valida el campo de email en el login.
- * Muestra mensajes de error y estilos según corresponda.
- */
-function validarEmailLogin() {
-    const emailInput = document.getElementById('correoLogin');
-    const errorDiv = document.getElementById('correoLoginError');
-    
-    if (!emailInput.value) {
-        emailInput.classList.add('is-invalid');
-        errorDiv.textContent = 'El correo es requerido';
-        return false;
-    }
-    
-    if (!validarEmail(emailInput.value)) {
-        emailInput.classList.add('is-invalid');
-        errorDiv.textContent = 'Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com';
-        return false;
-    }
-    
-    emailInput.classList.remove('is-invalid');
-    emailInput.classList.add('is-valid');
-    return true;
-}
-
-/**
- * Valida el campo de contraseña en el login.
- * Muestra mensajes de error y estilos según corresponda.
- */
-function validarPasswordLogin() {
-    const passwordInput = document.getElementById('passLogin');
-    const errorDiv = document.getElementById('passLoginError');
-    
-    if (!passwordInput.value) {
-        passwordInput.classList.add('is-invalid');
-        errorDiv.textContent = 'La contraseña es requerida';
-        return false;
-    }
-    
-    if (!validarLongitud(passwordInput.value, 4, 10)) {
-        passwordInput.classList.add('is-invalid');
-        errorDiv.textContent = 'La contraseña debe tener entre 4 y 10 caracteres';
-        return false;
-    }
-    
-    passwordInput.classList.remove('is-invalid');
-    passwordInput.classList.add('is-valid');
-    return true;
-}
-
-/**
- * Valida el formulario de login completo.
- */
-function validarLogin() {
-    const emailValido = validarEmailLogin();
-    const passwordValido = validarPasswordLogin();
-    return emailValido && passwordValido;
-}
-
-// -------- Validaciones para Registro --------
-
-/**
- * Valida el campo nombre en el registro.
- */
-function validarNombre() {
-    const nombreInput = document.getElementById('nombre');
-    const errorDiv = document.getElementById('nombreError');
-    
-    if (!nombreInput.value) {
-        nombreInput.classList.add('is-invalid');
-        errorDiv.textContent = 'El nombre es requerido';
-        return false;
-    }
-    
-    if (!validarLongitud(nombreInput.value, 1, 50)) {
-        nombreInput.classList.add('is-invalid');
-        errorDiv.textContent = 'El nombre debe tener máximo 50 caracteres';
-        return false;
-    }
-    
-    nombreInput.classList.remove('is-invalid');
-    nombreInput.classList.add('is-valid');
-    return true;
-}
-
-/**
- * Valida el campo apellido en el registro.
- */
-function validarApellido() {
-    const apellidoInput = document.getElementById('apellido');
-    const errorDiv = document.getElementById('apellidoError');
-    
-    if (!apellidoInput.value) {
-        apellidoInput.classList.add('is-invalid');
-        errorDiv.textContent = 'El apellido es requerido';
-        return false;
-    }
-    
-    if (!validarLongitud(apellidoInput.value, 1, 50)) {
-        apellidoInput.classList.add('is-invalid');
-        errorDiv.textContent = 'El apellido debe tener máximo 50 caracteres';
-        return false;
-    }
-    
-    apellidoInput.classList.remove('is-invalid');
-    apellidoInput.classList.add('is-valid');
-    return true;
-}
-
-/**
- * Valida el campo email en el registro.
- */
-function validarEmailRegistro() {
-    const emailInput = document.getElementById('correo');
-    const errorDiv = document.getElementById('correoError');
-    
-    if (!emailInput.value) {
-        emailInput.classList.add('is-invalid');
-        errorDiv.textContent = 'El correo es requerido';
-        return false;
-    }
-    
-    if (!validarEmail(emailInput.value)) {
-        emailInput.classList.add('is-invalid');
-        errorDiv.textContent = 'Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com';
-        return false;
-    }
-    
-    emailInput.classList.remove('is-invalid');
-    emailInput.classList.add('is-valid');
-    return true;
-}
-
-/**
- * Valida el campo contraseña en el registro.
- */
-function validarPasswordRegistro() {
-    const passwordInput = document.getElementById('contraseña');
-    const errorDiv = document.getElementById('contraseñaError');
-    
-    if (!passwordInput.value) {
-        passwordInput.classList.add('is-invalid');
-        errorDiv.textContent = 'La contraseña es requerida';
-        return false;
-    }
-    
-    if (!validarLongitud(passwordInput.value, 4, 10)) {
-        passwordInput.classList.add('is-invalid');
-        errorDiv.textContent = 'La contraseña debe tener entre 4 y 10 caracteres';
-        return false;
-    }
-    
-    passwordInput.classList.remove('is-invalid');
-    passwordInput.classList.add('is-valid');
-    return true;
-}
-
-/**
- * Valida que la confirmación de contraseña coincida con la contraseña.
- */
-function validarConfirmarPassword() {
-    const passwordInput = document.getElementById('contraseña');
-    const confirmInput = document.getElementById('confirmarContraseña');
-    const errorDiv = document.getElementById('confirmarContraseñaError');
-    
-    if (!confirmInput.value) {
-        confirmInput.classList.add('is-invalid');
-        errorDiv.textContent = 'Debes confirmar tu contraseña';
-        return false;
-    }
-    
-    if (passwordInput.value !== confirmInput.value) {
-        confirmInput.classList.add('is-invalid');
-        errorDiv.textContent = 'Las contraseñas no coinciden';
-        return false;
-    }
-    
-    confirmInput.classList.remove('is-invalid');
-    confirmInput.classList.add('is-valid');
-    return true;
-}
-
-/**
- * Valida que los términos y condiciones estén aceptados.
- */
-function validarTerminos() {
-    const terminosInput = document.getElementById('terminos');
-    
-    if (!terminosInput.checked) {
-        terminosInput.classList.add('is-invalid');
-        return false;
-    }
-    
-    terminosInput.classList.remove('is-invalid');
-    return true;
-}
-
-/**
- * Valida el formulario de registro completo.
- */
-function validarRegistro() {
-    const nombreValido = validarNombre();
-    const apellidoValido = validarApellido();
-    const emailValido = validarEmailRegistro();
-    const passwordValido = validarPasswordRegistro();
-    const confirmValido = validarConfirmarPassword();
-    const terminosValido = validarTerminos();
-    
-    return nombreValido && apellidoValido && emailValido && passwordValido && confirmValido && terminosValido;
-}
-
-// -------- Validaciones para Contacto --------
-
-/**
- * Valida el formulario de contacto (nombre, email, comentario).
- */
-function validarContacto() {
-    const nombreInput = document.getElementById('nombreContacto');
-    const emailInput = document.getElementById('correoContacto');
-    const comentarioInput = document.getElementById('comentario');
-    
-    let valido = true;
-    
-    // Validar nombre
-    if (!nombreInput.value) {
-        nombreInput.classList.add('is-invalid');
-        valido = false;
-    } else if (!validarLongitud(nombreInput.value, 1, 100)) {
-        nombreInput.classList.add('is-invalid');
-        valido = false;
-    } else {
-        nombreInput.classList.remove('is-invalid');
-        nombreInput.classList.add('is-valid');
-    }
-    
-    // Validar email
-    if (!emailInput.value) {
-        emailInput.classList.add('is-invalid');
-        valido = false;
-    } else if (!validarEmail(emailInput.value)) {
-        emailInput.classList.add('is-invalid');
-        valido = false;
-    } else {
-        emailInput.classList.remove('is-invalid');
-        emailInput.classList.add('is-valid');
-    }
-    
-    // Validar comentario
-    if (!comentarioInput.value) {
-        comentarioInput.classList.add('is-invalid');
-        valido = false;
-    } else if (!validarLongitud(comentarioInput.value, 1, 500)) {
-        comentarioInput.classList.add('is-invalid');
-        valido = false;
-    } else {
-        comentarioInput.classList.remove('is-invalid');
-        comentarioInput.classList.add('is-valid');
-    }
-    
-    return valido;
-}
-
-// -------- Validación y formateo de RUN (para admin) --------
-
-/**
- * Valida el formato del RUN chileno (sin puntos ni guión, largo y caracteres).
- */
-function validarRUN(run) {
-    run = run.replace(/[\.\-]/g, '');
-    if (run.length < 7 || run.length > 9) {
-        return false;
-    }
-    const runRegex = /^[0-9]+[0-9kK]{1}$/;
-    if (!runRegex.test(run)) {
-        return false;
-    }
-    return true;
-}
-
-/**
- * Formatea el RUN chileno con puntos y guión.
- */
-function formatearRUN(run) {
-    run = run.replace(/[\.\-]/g, '');
-    if (run.length <= 1) return run;
-    
-    let cuerpo = run.slice(0, -1);
-    let dv = run.slice(-1).toUpperCase();
-    
-    // Insertar puntos cada 3 dígitos desde el final
-    let formatted = '';
-    for (let i = cuerpo.length - 1, j = 1; i >= 0; i--, j++) {
-        formatted = cuerpo[i] + formatted;
-        if (j % 3 === 0 && i !== 0) {
-            formatted = '.' + formatted;
-        }
-    }
-    
-    return formatted + '-' + dv;
 }

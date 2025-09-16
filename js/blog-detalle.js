@@ -1,3 +1,4 @@
+// Datos de los artículos del blog
 const blogArticles = [
     {
         id: "1",
@@ -11,11 +12,12 @@ const blogArticles = [
             <h4><i class="bi bi-heart-pulse-fill text-success"></i> ¿Por qué elegir productos orgánicos?</h4>
             <p>
                 Los productos orgánicos son cultivados sin pesticidas ni fertilizantes sintéticos, lo que los hace más saludables para ti y para el planeta.
-                <br>
-                <i class="bi bi-check-circle-fill text-success"></i> <strong>Menos químicos:</strong> Reduces la exposición a sustancias tóxicas.<br>
-                <i class="bi bi-check-circle-fill text-success"></i> <strong>Más nutrientes:</strong> Suelen tener mayor concentración de vitaminas y minerales.<br>
-                <i class="bi bi-check-circle-fill text-success"></i> <strong>Mejor sabor:</strong> Su frescura y calidad se notan en cada bocado.
             </p>
+            <ul class="list-unstyled mb-4">
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Menos químicos:</strong> Reduces la exposición a sustancias tóxicas.</li>
+                <li><i class="bi bi-emoji-sunglasses text-warning me-2"></i><strong>Más nutrientes:</strong> Suelen tener mayor concentración de vitaminas y minerales.</li>
+                <li><i class="bi bi-emoji-heart-eyes text-danger me-2"></i><strong>Mejor sabor:</strong> Su frescura y calidad se notan en cada bocado.</li>
+            </ul>
             <div class="alert alert-success d-flex align-items-center" role="alert">
                 <i class="bi bi-leaf me-2"></i>
                 <div>
@@ -24,14 +26,19 @@ const blogArticles = [
             </div>
             <h5 class="mt-4"><i class="bi bi-emoji-smile text-warning"></i> Consejos para una vida más saludable</h5>
             <ul>
-                <li>Prefiere frutas y verduras de temporada.</li>
-                <li>Lava bien los alimentos antes de consumirlos.</li>
-                <li>Incluye variedad de colores en tu plato.</li>
+                <li><i class="bi bi-calendar2-week text-success me-2"></i>Prefiere frutas y verduras de temporada.</li>
+                <li><i class="bi bi-droplet-half text-primary me-2"></i>Lava bien los alimentos antes de consumirlos.</li>
+                <li><i class="bi bi-palette2 text-info me-2"></i>Incluye variedad de colores en tu plato.</li>
+                <li><i class="bi bi-people-fill text-secondary me-2"></i>Comparte tus comidas en familia.</li>
             </ul>
-            <blockquote class="blockquote mt-4">
-                <p class="mb-0">"Que tu alimento sea tu medicina y tu medicina sea tu alimento."</p>
+            <blockquote class="blockquote mt-4 text-center">
+                <p class="mb-0"><i class="bi bi-quote text-success"></i> Que tu alimento sea tu medicina y tu medicina sea tu alimento.</p>
                 <footer class="blockquote-footer">Hipócrates</footer>
             </blockquote>
+            <div class="alert alert-info mt-4" role="alert">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong>Dato:</strong> Los productos orgánicos ayudan a conservar la biodiversidad y los suelos fértiles.
+            </div>
         `
     },
     {
@@ -115,19 +122,21 @@ const blogArticles = [
     }
 ];
 
+// Cargar artículo específico cuando se visite blog-detalle.html
 document.addEventListener('DOMContentLoaded', function() {
+    // Solo ejecutar en la página de detalle del blog
+    if (!document.querySelector('.blog-article')) return;
+    
     const urlParams = new URLSearchParams(window.location.search);
     const articleId = urlParams.get('id');
     const article = blogArticles.find(a => a.id === articleId);
-
     const container = document.querySelector('.blog-article');
-    if (!container) return;
-
+    
     if (!article) {
         container.innerHTML = '<p class="text-muted">Artículo no encontrado.</p>';
         return;
     }
-
+    
     container.innerHTML = `
         <header class="text-center mb-5">
             <span class="badge bg-success mb-2">${article.categoria}</span>

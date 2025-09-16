@@ -1,38 +1,25 @@
-<!--
-Estructura de la página de contacto de HuertoHogar.
-Incluye navbar, formulario de contacto validado, información de contacto, footer y scripts.
-Cada sección está pensada para ser fácilmente mantenida y ampliada.
--->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Metadatos y enlaces a estilos y fuentes -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HuertoHogar - Contacto</title>
-    <!-- Bootstrap CSS para estilos y layout responsivo -->
+    <title>Contacto</title>
+    <link rel="icon" type="image/png" href="img/flower2.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons para iconografía -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!-- Google Fonts para tipografía personalizada -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-    <!-- Estilos personalizados del proyecto -->
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-    <!-- Navbar: navegación principal del sitio -->
+    <!-- barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
         <div class="container">
-            <!-- Logo y nombre del sitio -->
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-flower1 me-2"></i>HuertoHogar
             </a>
-            <!-- Botón para menú colapsable en móvil -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Enlaces de navegación -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
@@ -41,11 +28,10 @@ Cada sección está pensada para ser fácilmente mantenida y ampliada.
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link active" href="contacto.html">Contacto</a></li>
                 </ul>
-                <!-- Icono de carrito y enlaces de usuario -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.html">
-                            <i class="bi bi-cart3"></i> 
+                            <i class="bi bi-cart3"></i>
                             <span class="badge bg-warning text-dark" id="cartCount">0</span>
                         </a>
                     </li>
@@ -55,7 +41,6 @@ Cada sección está pensada para ser fácilmente mantenida y ampliada.
             </div>
         </div>
     </nav>
-
     <!-- Contenido Principal -->
     <main class="container my-5">
         <div class="row">
@@ -68,7 +53,7 @@ Cada sección está pensada para ser fácilmente mantenida y ampliada.
                             <h2 class="card-title text-center mt-2 section-title">Contáctanos</h2>
                             <p class="text-muted">Estamos aquí para ayudarte. Escríbenos y te responderemos a la brevedad.</p>
                         </div>
-
+                        
                         <!-- Formulario de contacto con validación y contador de caracteres -->
                         <form id="formContacto" novalidate>
                             <div class="row">
@@ -84,6 +69,7 @@ Cada sección está pensada para ser fácilmente mantenida y ampliada.
                                         El nombre es requerido (máx. 100 caracteres)
                                     </div>
                                 </div>
+                                
                                 <!-- Campo Correo -->
                                 <div class="col-md-6 mb-3">
                                     <label for="correoContacto" class="form-label">Correo Electrónico</label>
@@ -121,14 +107,15 @@ Cada sección está pensada para ser fácilmente mantenida y ampliada.
                                     El mensaje es requerido (máx. 500 caracteres)
                                 </div>
                             </div>
+                            
                             <!-- Botón de envío -->
                             <button type="submit" class="btn btn-primary w-100 py-2">
                                 <i class="bi bi-send me-2"></i>Enviar Mensaje
                             </button>
                         </form>
-
+                        
                         <hr class="my-4">
-
+                        
                         <!-- Información de contacto adicional (ubicación, teléfono, email) -->
                         <div class="row mt-4">
                             <div class="col-md-4 text-center">
@@ -153,18 +140,19 @@ Cada sección está pensada para ser fácilmente mantenida y ampliada.
         </div>
     </main>
 
-    <!-- Footer del sitio -->
+    <!-- Footer -->
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container text-center">
             <p>&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
         </div>
     </footer>
 
-    <!-- Scripts para funcionalidad y validación -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cartManager.js"></script>
     <script src="js/validaciones.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const formContacto = document.getElementById('formContacto');
@@ -185,29 +173,83 @@ Cada sección está pensada para ser fácilmente mantenida y ampliada.
             // Validación del formulario al enviar
             formContacto.addEventListener('submit', function(e) {
                 e.preventDefault();
-                if (validarContacto()) {
-                    // Simular envío exitoso
-                    mostrarMensaje('¡Mensaje enviado correctamente! Te contactaremos pronto.', 'success');
-                    // Limpiar formulario y contador
-                    formContacto.reset();
-                    contadorCaracteres.textContent = '500';
-                    // Quitar clases de validación
-                    const inputs = formContacto.querySelectorAll('.form-control');
-                    inputs.forEach(input => {
-                        input.classList.remove('is-valid');
-                    });
+                
+                // Obtener valores
+                const nombre = document.getElementById('nombreContacto').value.trim();
+                const email = document.getElementById('correoContacto').value.trim();
+                const comentario = document.getElementById('comentario').value.trim();
+                
+                // Validar
+                const errores = validarContacto({ nombre, email, comentario });
+                
+                // Limpiar feedback
+                document.getElementById('nombreContacto').classList.remove('is-invalid', 'is-valid');
+                document.getElementById('correoContacto').classList.remove('is-invalid', 'is-valid');
+                document.getElementById('comentario').classList.remove('is-invalid', 'is-valid');
+                
+                let hayErrores = false;
+                
+                // Mostrar errores
+                if (errores.nombre) {
+                    document.getElementById('nombreContacto').classList.add('is-invalid');
+                    hayErrores = true;
+                } else {
+                    document.getElementById('nombreContacto').classList.add('is-valid');
                 }
+                
+                if (errores.email) {
+                    document.getElementById('correoContacto').classList.add('is-invalid');
+                    hayErrores = true;
+                } else {
+                    document.getElementById('correoContacto').classList.add('is-valid');
+                }
+                
+                if (errores.comentario) {
+                    document.getElementById('comentario').classList.add('is-invalid');
+                    hayErrores = true;
+                } else {
+                    document.getElementById('comentario').classList.add('is-valid');
+                }
+                
+                if (hayErrores) return;
+                
+                // Guardar contacto
+                const contacto = {
+                    nombre,
+                    email,
+                    asunto: document.getElementById('asunto').value.trim(),
+                    comentario,
+                    fecha: new Date().toISOString()
+                };
+                
+                let contactos = JSON.parse(localStorage.getItem('huertohogar_contactos')) || [];
+                contactos.push(contacto);
+                localStorage.setItem('huertohogar_contactos', JSON.stringify(contactos));
+                
+                // Mostrar mensaje de éxito
+                mostrarMensaje('¡Mensaje enviado correctamente! Te contactaremos pronto.', 'success');
+                
+                // Resetear formulario
+                formContacto.reset();
+                contadorCaracteres.textContent = '500';
+                
+                // Quitar clases de validación
+                const inputs = formContacto.querySelectorAll('.form-control');
+                inputs.forEach(input => {
+                    input.classList.remove('is-valid');
+                });
             });
             
             // Validación en tiempo real para nombre
             document.getElementById('nombreContacto').addEventListener('input', function() {
-                if (this.value && validarLongitud(this.value, 1, 100)) {
+                if (this.value && this.value.trim().length > 0 && this.value.trim().length <= 100) {
                     this.classList.remove('is-invalid');
                     this.classList.add('is-valid');
                 } else {
                     this.classList.remove('is-valid');
                 }
             });
+            
             // Validación en tiempo real para correo
             document.getElementById('correoContacto').addEventListener('input', function() {
                 if (this.value && validarEmail(this.value)) {
@@ -217,9 +259,10 @@ Cada sección está pensada para ser fácilmente mantenida y ampliada.
                     this.classList.remove('is-valid');
                 }
             });
+            
             // Validación en tiempo real para comentario
             document.getElementById('comentario').addEventListener('input', function() {
-                if (this.value && validarLongitud(this.value, 1, 500)) {
+                if (this.value && this.value.trim().length > 0 && this.value.trim().length <= 500) {
                     this.classList.remove('is-invalid');
                     this.classList.add('is-valid');
                 } else {

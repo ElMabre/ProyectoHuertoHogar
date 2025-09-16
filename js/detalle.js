@@ -1,4 +1,5 @@
 // detalle.js
+
 document.addEventListener('DOMContentLoaded', function() {
     // Obtiene el ID del producto desde la URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -34,7 +35,6 @@ function renderProductDetail(product) {
     productDetail.innerHTML = `
         <div class="col-md-6 mb-4">
             <img src="${product.imagen}" class="img-fluid rounded shadow product-img-lg" alt="${product.nombre}">
-
         </div>
         <div class="col-md-6 mb-4">
             <div class="card border-0">
@@ -132,4 +132,8 @@ function renderRelatedProducts(product) {
 function addToCartWithQuantity(productId) {
     const cantidad = parseInt(document.getElementById('cantidad').value) || 1;
     addToCart(productId, cantidad);
+    // Mostrar mensaje de confirmación
+    if (typeof showToast === 'function') {
+        showToast('Producto añadido al carrito', 'success');
+    }
 }

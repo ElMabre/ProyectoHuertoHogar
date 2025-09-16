@@ -144,7 +144,7 @@ class ProductManager {
     setupFilters() {
         const categoriaFilter = document.getElementById('categoriaFilter');
         const searchProduct = document.getElementById('searchProduct');
-
+        
         // Filtro por categoría
         if (categoriaFilter) {
             categoriaFilter.addEventListener('change', () => this.filterProducts());
@@ -160,18 +160,24 @@ class ProductManager {
     filterProducts() {
         const categoria = document.getElementById('categoriaFilter')?.value || '';
         const searchTerm = document.getElementById('searchProduct')?.value.toLowerCase() || '';
-
+        
         // Filtra por categoría y por coincidencia en nombre, descripción u origen
         const filtered = this.products.filter(product => {
             const matchesCategoria = !categoria || product.categoria === categoria;
             const matchesSearch = !searchTerm || 
-                                product.nombre.toLowerCase().includes(searchTerm) ||
-                                product.descripcion.toLowerCase().includes(searchTerm) ||
-                                product.origen.toLowerCase().includes(searchTerm);
+                                  product.nombre.toLowerCase().includes(searchTerm) ||
+                                  product.descripcion.toLowerCase().includes(searchTerm) ||
+                                  product.origen.toLowerCase().includes(searchTerm);
             return matchesCategoria && matchesSearch;
         });
-
+        
         this.renderProducts(filtered);
+        
+        // Mostrar mensaje si no hay productos
+        const noProducts = document.getElementById('noProducts');
+        if (noProducts) {
+            noProducts.classList.toggle('d-none', filtered.length > 0);
+        }
     }
 
     // Devuelve un producto por su ID
@@ -213,3 +219,6 @@ class ProductManager {
 
 // Inicializar el productManager global para acceso desde otras partes del sitio
 window.productManager = new ProductManager();
+
+// Guardar productos en localStorage para acceso global (carrito, etc)
+localStorage.setItem('huertohogar_productos', JSON.stringify(window.productManager.products));

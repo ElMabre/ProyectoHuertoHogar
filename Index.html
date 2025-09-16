@@ -1,119 +1,304 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Metadatos y enlaces a estilos y fuentes -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HuertoHogar - Inicio</title>
-    <!-- Bootstrap CSS para estilos y layout responsivo -->
+    <title>Inicio</title>
+    <link rel="icon" type="image/png" href="img/flower2.png">
+    <meta name="description" content="Productos frescos y naturales directo del campo a tu hogar. HuertoHogar ofrece la mejor calidad en frutas, verduras y productos orgánicos.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons para iconografía -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!-- Google Fonts para tipografía personalizada -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-    <!-- Estilos personalizados del proyecto -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-    <!-- Navbar: navegación principal del sitio -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #2E8B57;">
         <div class="container">
-            <!-- Logo y nombre del sitio -->
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-flower1 me-2"></i>HuertoHogar
             </a>
-            <!-- Botón para menú colapsable en móvil -->
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Enlaces de navegación -->
+            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="productos.html">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
                 </ul>
-                <!-- Icono de carrito y enlaces de usuario -->
+                
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.html">
-                            <i class="bi bi-cart3"></i> 
+                            <i class="bi bi-cart3"></i>
                             <span class="badge bg-warning text-dark" id="cartCount">0</span>
                         </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>
-                    <li class="nav-item"><a class="nav-link" href="registro.html">Registrarse</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.html">Registrarse</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section: bienvenida y llamado a la acción -->
-    <section class="hero bg-success text-white py-5">
-        <div class="container text-center">
-            <h1 class="display-4 fw-bold">¡Bienvenido a HuertoHogar!</h1>
-            <p class="lead">Productos frescos y naturales directo del campo a tu hogar</p>
-            <a href="productos.html" class="btn btn-warning btn-lg mt-3">Ver Productos</a>
-        </div>
-    </section>
-
-    <!-- Catálogo de Productos Destacados: muestra productos seleccionados en cards -->
-    <section class="py-5">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <h2 class="text-center mb-4 section-title">Productos Destacados</h2>
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="featuredProducts">
-                <!-- Los productos se cargarán con JavaScript -->
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <img src="img/huertohogarlogoconfondo.png" 
+                         alt="Logo HuertoHogar" 
+                         class="mb-4 mx-auto d-block animate-fade-in">
+                    <h1 class="display-4 fw-bold mb-4">¡Bienvenido a HuertoHogar!</h1>
+                    <p class="lead mb-5">Productos frescos y naturales directo del campo a tu hogar. Conectamos a las familias chilenas con lo mejor de nuestra tierra.</p>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="productos.html" class="btn btn-warning btn-lg">Ver Productos</a>
+                        <a href="nosotros.html" class="btn btn-outline-light btn-lg">Conócenos</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer: información legal y redes sociales -->
+    <!-- Beneficios -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col">
+                    <h2 class="section-title">¿Por qué elegir HuertoHogar?</h2>
+                    <p class="text-muted">Te ofrecemos la mejor experiencia en productos frescos y naturales</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-truck display-4 mb-3" style="color: #2E8B57;"></i>
+                            <h3 class="h4">Envío Rápido</h3>
+                            <p class="text-muted">Recibe tus productos frescos en la puerta de tu casa en 24-48 horas</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-arrow-repeat display-4 mb-3" style="color: #2E8B57;"></i>
+                            <h3 class="h4">Frescura Garantizada</h3>
+                            <p class="text-muted">Productos cosechados en su punto óptimo y entregados directamente a tu hogar</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-heart display-4 mb-3" style="color: #2E8B57;"></i>
+                            <h3 class="h4">Calidad Premium</h3>
+                            <p class="text-muted">Seleccionamos los mejores productos orgánicos y sostenibles para ti</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col">
+                    <h2 class="section-title">Productos Destacados</h2>
+                    <p class="text-muted">Descubre nuestros productos más populares</p>
+                </div>
+            </div>
+            
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="featuredProducts">
+                <!-- Los productos se cargarán con JavaScript -->
+                <div class="col text-center">
+                    <div class="spinner-border text-success" role="status">
+                        <span class="visually-hidden">Cargando productos...</span>
+                    </div>
+                    <p class="mt-2">Cargando productos...</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="productos.html" class="btn btn-outline-success">Ver Todos los Productos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorías -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col">
+                    <h2 class="section-title">Nuestras Categorías</h2>
+                    <p class="text-muted">Explora nuestra variedad de productos frescos</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 col-6 mb-4">
+                    <a href="productos.html?categoria=frutas" class="text-decoration-none">
+                        <div class="card category-card h-100 border-0 shadow-sm">
+                            <img src="img/FrutasFrescas.avif"
+                                 class="card-img-top" alt="Frutas Frescas" style="height: 180px; object-fit: cover;">
+                            <div class="card-body text-center">
+                                <h3 class="h5">Frutas Frescas</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="col-md-3 col-6 mb-4">
+                    <a href="productos.html?categoria=verduras" class="text-decoration-none">
+                        <div class="card category-card h-100 border-0 shadow-sm">
+                            <img src="img/VerdurasOrganicas.avif"
+                                 class="card-img-top" alt="Verduras Orgánicas" style="height: 180px; object-fit: cover;">
+                            <div class="card-body text-center">
+                                <h3 class="h5">Verduras Orgánicas</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="col-md-3 col-6 mb-4">
+                    <a href="productos.html?categoria=organicos" class="text-decoration-none">
+                        <div class="card category-card h-100 border-0 shadow-sm">
+                            <img src="img/ProductosOrganicos.webp"
+                                 class="card-img-top" alt="Productos Orgánicos" style="height: 180px; object-fit: cover;">
+                            <div class="card-body text-center">
+                                <h3 class="h5">Productos Orgánicos</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="col-md-3 col-6 mb-4">
+                    <a href="productos.html?categoria=lacteos" class="text-decoration-none">
+                        <div class="card category-card h-100 border-0 shadow-sm">
+                            <img src="img/ProductosLacteos.avif"
+                                 class="card-img-top" alt="Productos Lácteos" style="height: 180px; object-fit: cover;">
+                            <div class="card-body text-center">
+                                <h3 class="h5">Productos Lácteos</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-5 bg-success text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-3">Suscríbete a nuestro Newsletter</h2>
+                    <p class="mb-4">Recibe ofertas exclusivas, recetas saludables y consejos para tu huerto urbano</p>
+                    
+                    <form class="row g-2 justify-content-center">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Tu correo electrónico" required>
+                                <button class="btn btn-warning" type="submit">
+                                    Suscribirme
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <small class="d-block mt-3">* Nos comprometemos a no compartir tu información con terceros</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="bg-dark text-white py-4">
-        <div class="container text-center">
-            <p>&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
-            <div class="mt-2">
-                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="fw-bold">HuertoHogar</h5>
+                    <p>Conectando a las familias chilenas con el campo desde 2019. Productos frescos y naturales directo a tu hogar.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter fs-5"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="fw-bold">Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Inicio</a></li>
+                        <li><a href="productos.html" class="text-white text-decoration-none">Productos</a></li>
+                        <li><a href="nosotros.html" class="text-white text-decoration-none">Nosotros</a></li>
+                        <li><a href="blog.html" class="text-white text-decoration-none">Blog</a></li>
+                        <li><a href="contacto.html" class="text-white text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5 class="fw-bold">Categorías</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="productos.html?categoria=frutas" class="text-white text-decoration-none">Frutas Frescas</a></li>
+                        <li><a href="productos.html?categoria=verduras" class="text-white text-decoration-none">Verduras Orgánicas</a></li>
+                        <li><a href="productos.html?categoria=organicos" class="text-white text-decoration-none">Productos Orgánicos</a></li>
+                        <li><a href="productos.html?categoria=lacteos" class="text-white text-decoration-none">Productos Lácteos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3">
+                    <h5 class="fw-bold">Contacto</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i> Av. Principal 123, Santiago</li>
+                        <li><i class="bi bi-telephone me-2"></i> +56 2 2345 6789</li>
+                        <li><i class="bi bi-envelope me-2"></i> contacto@huertohogar.cl</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 HuertoHogar - Todos los derechos reservados</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white text-decoration-none me-3">Términos y Condiciones</a>
+                    <a href="#" class="text-white text-decoration-none">Política de Privacidad</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts: Bootstrap, lógica general y carrito -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/cartManager.js"></script>
     <script src="js/productManager.js"></script>
-    <script>
-        // Mostrar productos destacados en el inicio
-        document.addEventListener('DOMContentLoaded', function() {
-            const featuredProducts = productManager.getFeaturedProducts(3);
-            const productsContainer = document.getElementById('featuredProducts');
-            featuredProducts.forEach(product => {
-                productsContainer.innerHTML += `
-                    <div class="col">
-                        <div class="card h-100 shadow-sm">
-                            <a href="detalle.html?id=${product.id}">
-                                <img src="${product.imagen}" class="card-img-top product-img img-fluid" alt="${product.nombre}">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title" style="color: #8B4513;">${product.nombre}</h5>
-                                <p class="card-text">${product.descripcion}</p>
-                                <p class="fw-bold text-success">$${product.precio.toLocaleString('es-CL')}</p>
-                                <button class="btn btn-warning w-100" onclick="addToCart('${product.id}')">
-                                    <i class="bi bi-cart-plus"></i> Añadir al carrito
-                                </button>
-                                <a href="detalle.html?id=${product.id}" class="btn btn-outline-secondary w-100 mt-2">
-                                    Ver más
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        });
-    </script>
-</body>
-</html>
+    <script src="js/cartManager.js"></script>
+    <script src="js/cartManager.js"></script>
+</body></html>

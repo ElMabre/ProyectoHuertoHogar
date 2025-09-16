@@ -1,5 +1,3 @@
-// Inicializa Google Maps y agrega marcadores para las tiendas físicas
-
 const locales = [
     { nombre: "Santiago", direccion: "Av. Principal 123", lat: -33.4489, lng: -70.6693 },
     { nombre: "Puerto Montt", direccion: "Costanera 456", lat: -41.4693, lng: -72.9424 },
@@ -22,8 +20,6 @@ function initMap() {
             map,
             title: `${local.nombre} - ${local.direccion}`
         });
-
-        // InfoWindow opcional
         const info = new google.maps.InfoWindow({
             content: `<strong>${local.nombre}</strong><br>${local.direccion}`
         });
@@ -33,8 +29,6 @@ function initMap() {
         });
     });
 }
-
-// Espera a que el DOM esté listo y la API de Google Maps cargada
 window.addEventListener('DOMContentLoaded', () => {
     if (typeof google !== "undefined") {
         initMap();
