@@ -114,36 +114,25 @@ function updateCartCount() {
  * Actualiza la interfaz según el estado de autenticación del usuario
  */
 function updateAuthUI() {
-    const currentUser = JSON.parse(localStorage.getItem('huertohogar_usuario_actual'));
-    const authLinks = document.getElementById('authLinks');
-    const userLinks = document.getElementById('userLinks');
-    const adminLink = document.getElementById('adminLink');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const authLinks = document.querySelectorAll('.auth-link');
+    const userLinks = document.querySelectorAll('.user-link');
     
-    if (authLinks && userLinks) {
-        if (currentUser) {
-            // Usuario autenticado
-            authLinks.style.display = 'none';
-            userLinks.style.display = 'block';
-            
-            // Mostrar nombre de usuario
-            const userName = document.getElementById('userName');
-            if (userName) {
-                userName.textContent = currentUser.nombre || currentUser.email;
-            }
-            
-            // Mostrar enlace a admin si es administrador
-            if (adminLink && currentUser.role === 'admin') {
-                adminLink.style.display = 'block';
-            }
-        } else {
-            // Usuario no autenticado
-            authLinks.style.display = 'block';
-            userLinks.style.display = 'none';
-            
-            if (adminLink) {
-                adminLink.style.display = 'none';
-            }
+    if (currentUser) {
+        // Usuario autenticado - ocultar enlaces de auth y mostrar enlaces de usuario
+        authLinks.forEach(link => link.classList.add('d-none'));
+        userLinks.forEach(link => link.classList.remove('d-none'));
+        
+        // Mostrar nombre de usuario
+        const userName = document.getElementById('userName');
+        if (userName) {
+            userName.textContent = currentUser.nombre;
         }
+        
+    } else {
+        // Usuario no autenticado - mostrar enlaces de auth y ocultar enlaces de usuario
+        authLinks.forEach(link => link.classList.remove('d-none'));
+        userLinks.forEach(link => link.classList.add('d-none'));
     }
 }
 
@@ -151,14 +140,7 @@ function updateAuthUI() {
  * Función para cerrar sesión
  */
 function logout() {
-    localStorage.removeItem('huertohogar_usuario_actual');
-    updateAuthUI();
-    showToast('Sesión cerrada correctamente', 'success');
-    
-    // Redirigir a la página de inicio después de cerrar sesión
-    setTimeout(() => {
-        window.location.href = 'index.html';
-    }, 1500);
+    logoutUsuario();
 }
 
 /**

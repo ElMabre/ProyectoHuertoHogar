@@ -9,11 +9,38 @@ class AdminManager {
 
   // Inicializa el panel de administración
   init() {
+    // Verificar autenticación y proteger la página
+    this.verifyAuthentication();
     this.setupNavigation(); // Configura la navegación lateral
     this.loadProducts();    // Carga la tabla de productos
     this.loadUsers();       // Carga la tabla de usuarios
     this.loadOrders();      // Carga la tabla de pedidos
     this.setupModals();     // Configura los modales de productos y usuarios
+  }
+
+  // Verifica que el usuario sea administrador y muestra su nombre
+  verifyAuthentication() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    if (!currentUser || currentUser.rol !== 'admin') {
+      alert('Acceso denegado. Debes ser administrador para ver esta página.');
+      window.location.href = 'login.html';
+      return;
+    }
+
+    // Mostrar el nombre del administrador
+    const adminName = document.getElementById('adminName');
+    if (adminName) {
+      adminName.textContent = currentUser.nombre;
+    }
+
+    // Configurar botón de cierre de sesión
+    const logoutButton = document.getElementById('logoutButton');
+    if (logoutButton) {
+      logoutButton.addEventListener('click', () => {
+        logoutUsuario();
+      });
+    }
   }
 
   // Configura la navegación del sidebar y muestra la sección correspondiente
