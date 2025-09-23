@@ -1,22 +1,55 @@
-// Validaciones centralizadas para HuertoHogar
+/**
+ * ======================================
+ * VALIDACIONES CENTRALIZADAS - HUERTOHOGAR
+ * ======================================
+ * 
+ * Contiene todas las funciones de validación para formularios:
+ * - Validación de email (solo dominios específicos)
+ * - Validación de contraseñas y datos personales
+ * - Validación de formularios completos
+ * - Utilidades para mostrar mensajes de error
+ * 
+ * @author HuertoHogar Team
+ * @version 1.0
+ */
 
-// -- Validación de Email --
+// ======================================
+// VALIDACIONES INDIVIDUALES
+// ======================================
+
+/**
+ * Valida el formato de email
+ * Solo permite dominios: duoc.cl, profesor.duoc.cl, gmail.com
+ * @param {string} email - Email a validar
+ * @returns {boolean} - True si es válido
+ */
 function validarEmail(email) {
     if (!email) return false;
     if (email.length > 100) return false;
+    
     // Solo dominios permitidos: duoc.cl, profesor.duoc.cl, gmail.com
     const regex = /^[\w.-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
     return regex.test(email.trim());
 }
 
-// -- Validación de Contraseña --
+/**
+ * Valida el formato de contraseña
+ * Debe tener entre 4 y 10 caracteres
+ * @param {string} pass - Contraseña a validar
+ * @returns {boolean} - True si es válida
+ */
 function validarPassword(pass) {
     if (!pass) return false;
     // Debe tener entre 4 y 10 caracteres
     return pass.length >= 4 && pass.length <= 10;
 }
 
-// -- Validación de Nombre (registro/contacto) --
+/**
+ * Valida el formato de nombre
+ * No debe estar vacío y máximo 100 caracteres
+ * @param {string} nombre - Nombre a validar
+ * @returns {boolean} - True si es válido
+ */
 function validarNombre(nombre) {
     if (!nombre) return false;
     // No vacío y máximo 100 caracteres

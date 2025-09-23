@@ -130,87 +130,12 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Funciones generales -->
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/login.js"></script>
     <!-- Carrito de compras -->
     <script src="js/cartManager.js"></script>
     <!-- Validaciones de formularios -->
     <script src="js/validaciones.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Cargar correo guardado si existe
-            const savedEmail = localStorage.getItem('huertohogar_remembered_email');
-            if (savedEmail) {
-                document.getElementById('correoLogin').value = savedEmail;
-                document.getElementById('rememberMe').checked = true;
-            }
-            const formLogin = document.getElementById('formLogin');
-            const togglePassword = document.getElementById('togglePassword');
-            const passwordInput = document.getElementById('passLogin');
-            // Mostrar/ocultar contraseña
-            if (togglePassword && passwordInput) {
-                togglePassword.addEventListener('click', function() {
-                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                    passwordInput.setAttribute('type', type);
-                    this.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
-                });
-            }
-            // Validación del formulario
-            if (formLogin) {
-                formLogin.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // Limpiar feedback
-                    document.getElementById('correoLogin').classList.remove('is-invalid', 'is-valid');
-                    document.getElementById('passLogin').classList.remove('is-invalid', 'is-valid');
-                    const email = document.getElementById('correoLogin').value.trim();
-                    const password = document.getElementById('passLogin').value;
-                    let isValid = true;
-                    // Validar email
-                    if (!validarEmail(email)) {
-                        document.getElementById('correoLogin').classList.add('is-invalid');
-                        isValid = false;
-                    } else {
-                        document.getElementById('correoLogin').classList.add('is-valid');
-                    }
-                    // Validar contraseña
-                    if (!validarPassword(password)) {
-                        document.getElementById('passLogin').classList.add('is-invalid');
-                        isValid = false;
-                    } else {
-                        document.getElementById('passLogin').classList.add('is-valid');
-                    }
-                    if (!isValid) return;
-                    // Verificar credenciales
-                    const usuarios = JSON.parse(localStorage.getItem('huertohogar_usuarios')) || [];
-                    const usuario = usuarios.find(u => u.email === email && u.password === password);
-                    if (!usuario) {
-                        document.getElementById('correoLogin').classList.add('is-invalid');
-                        document.getElementById('passLogin').classList.add('is-invalid');
-                        if (typeof showToast === 'function') {
-                            showToast('Correo o contraseña incorrectos', 'danger');
-                        } else {
-                            alert('Correo o contraseña incorrectos');
-                        }
-                        return;
-                    }
-                    // Guardar email si "Recordarme" está marcado
-                    if (document.getElementById('rememberMe').checked) {
-                        localStorage.setItem('huertohogar_remembered_email', email);
-                    } else {
-                        localStorage.removeItem('huertohogar_remembered_email');
-                    }
-                    // Guardar usuario en sesión
-                    localStorage.setItem('huertohogar_usuario_actual', JSON.stringify(usuario));
-                    // Mostrar mensaje de éxito
-                    if (typeof showToast === 'function') {
-                        showToast('¡Inicio de sesión exitoso!', 'success');
-                    }
-                    // Redirigir a la página principal
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 1000);
-                });
-            }
-        });
-    </script>
 </body>
 </html>

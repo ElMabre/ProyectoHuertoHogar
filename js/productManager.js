@@ -1,4 +1,22 @@
-// Clase principal para la gestión de productos en la tienda
+/**
+ * ======================================
+ * GESTOR DE PRODUCTOS - HUERTOHOGAR
+ * ======================================
+ * 
+ * Maneja toda la lógica relacionada con productos:
+ * - Almacén de productos simulado (hardcodeado)
+ * - Renderizado de productos en la interfaz
+ * - Filtrado por categoría y búsqueda de texto
+ * - Gestión de stock
+ * - Productos destacados y relacionados
+ * 
+ * @author HuertoHogar Team
+ * @version 1.0
+ */
+
+/**
+ * Clase principal para la gestión de productos en la tienda
+ */
 class ProductManager {
     constructor() {
         // Lista de productos disponibles en la tienda (simulada, hardcodeada)
